@@ -2,18 +2,18 @@ import React from 'react'
 
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
-import Home from './components/Home'
-import Login from './components/Login'
 import Navigation from './components/Navigation'
 import PrivateRoute from './components/PrivateRoute'
-import Profile from './components/Profile'
-import ProjectDetail from './components/ProjectDetails'
-import Projects from './components/Projects'
-import Sprints from './components/Sprints'
-import StudentDetail from './components/StudentDetails'
-import Students from './components/Students'
-import Tasks from './components/Tasks'
-import Teams from './components/Teams'
+import Home from './pages/Home'
+import Login from './pages/Login'
+import Profile from './pages/Profile'
+import ProjectDetail from './pages/ProjectDetails'
+import Projects from './pages/Projects'
+import Sprints from './pages/Sprints'
+import StudentDetail from './pages/StudentDetails'
+import Students from './pages/Students'
+import Tasks from './pages/Tasks'
+import Teams from './pages/Teams'
 
 function App() {
   return (
