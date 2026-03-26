@@ -12,7 +12,7 @@ import Projects from './pages/Projects'
 import Sprints from './pages/Sprints'
 import StudentDetail from './pages/StudentDetails'
 import Students from './pages/Students'
-import Tasks from './pages/Tasks'
+import Tasks from './pages/TasksPage/Tasks'
 import Teams from './pages/Teams'
 
 function App() {
