@@ -119,7 +119,6 @@ const StudentDetail: React.FC = () => {
           setError('Ошибка удаления студента')
           console.error('API Error:', response.error)
         } else {
-          // Перенаправляем на список студентов
           window.location.href = '/students'
         }
       } catch (err) {
