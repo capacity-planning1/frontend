@@ -39,9 +39,7 @@ const Students: React.FC = () => {
           page_size: 10,
         }
 
-        // Добавляем поиск, если есть
         if (searchTerm) {
-          // Поиск по имени или фамилии
           queryParams.first_name = searchTerm
           queryParams.last_name = searchTerm
         }
@@ -78,7 +76,7 @@ const Students: React.FC = () => {
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault()
     setSearchTerm(searchInput)
-    setPage(1) // Сбрасываем на первую страницу при новом поиске
+    setPage(1)
   }
 
   const handleClearSearch = () => {
