@@ -1,5 +1,5 @@
 import { Box, Paper, Button, Typography } from '@mui/material';
-import projectLogo from '../pics/project-logo.jpg';
+import projectLogo from '../../../assets/images/project-logo.jpg';
 import '../MyTasks.scss';
 
 interface Task {
@@ -27,8 +27,12 @@ const TaskCard = ({ task }: TaskCardProps) => {
       </Box>
 
       <Box className="task-info">
-        <Typography className="task-title">{task.title}</Typography>
-        <Typography className="task-description">{task.description}</Typography>
+        <Typography className="task-title">
+          {task.title}
+        </Typography>
+        <Typography className="task-description">
+          {task.description}
+        </Typography>
         <Typography className="task-time">
           Кол-во оставшегося времени / кол-во запланированного времени
         </Typography>

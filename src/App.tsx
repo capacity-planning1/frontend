@@ -2,6 +2,9 @@ import React from 'react'
 
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
+import { ThemeProvider } from '@mui/material/styles';
+import { theme } from './styles/theme';
+
 import Navigation from './components/Navigation'
 import PrivateRoute from './components/PrivateRoute'
 import Home from './pages/Home'
@@ -98,7 +101,9 @@ function App() {
             path='/tasks'
             element={
               <PrivateRoute>
-                <Tasks />
+                <ThemeProvider theme={theme}>
+                  <Tasks />
+                </ThemeProvider>
               </PrivateRoute>
             }
           />

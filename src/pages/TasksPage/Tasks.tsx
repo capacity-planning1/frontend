@@ -1,7 +1,8 @@
 import { useState } from 'react';
-import { Box, Paper, Button } from '@mui/material';
-import './Tasks.scss';
-import appLogo from './pics/app-logo.jpg';
+import { Box, Paper, Button, ThemeProvider } from '@mui/material';
+import { theme } from '../../styles/theme';
+import './MyTasks.scss';
+import appLogo from '../../assets/images/app-logo.jpg';
 import TasksList from './components/TasksList';
 
 interface Task {
@@ -38,29 +39,49 @@ const Tasks = () => {
   ]);
 
   return (
-    <Box className="tasks-page">
-      <Paper className="tasks-header" elevation={0} square>
-        <Box className="header-left">
-          <Box className="header-avatar">
-            <Box
-              component="img"
-              src={appLogo}
-              alt="Header project logo"
-              className="header-logo"
-            />
+    <ThemeProvider theme={theme}>
+      <Box className="my-tasks-page">
+        <Paper className="tasks-header" elevation={0} square sx={{ borderRadius: 0}}>
+          <Box className="header-left">
+            <Box className="header-avatar">
+              <Box
+                component="img"
+                src={appLogo}
+                alt="Header project logo"
+                className="header-logo"
+              />
+            </Box>
+            <Box className="tasks-tabs">
+              <Button 
+                className="tasks-tab" 
+                disableRipple 
+                sx={{ textTransform: 'none' }}
+              >
+                Мои проекты
+              </Button>
+              <Button 
+                className="tasks-tab active" 
+                disableRipple 
+                sx={{ textTransform: 'none' }}
+              >
+                Мои задачи
+              </Button>
+            </Box>
           </Box>
-          <Box className="tasks-tabs">
-            <Button className="tasks-tab" disableRipple sx={{ textTransform: 'none' }}>Мои проекты</Button>
-            <Button className="tasks-tab active" disableRipple sx={{ textTransform: 'none' }}>Мои задачи</Button>
-          </Box>
-        </Box>
-        <Button className="tasks-logout" disableRipple sx={{ textTransform: 'none' }}>Выйти</Button>
-      </Paper>
+          <Button 
+            className="tasks-logout" 
+            disableRipple 
+            sx={{ textTransform: 'none' }}
+          >
+            Выйти
+          </Button>
+        </Paper>
 
-      <Box className="tasks-content">
-        <TasksList tasks={tasks} />
+        <Box className="tasks-content">
+          <TasksList tasks={tasks} />
+        </Box>
       </Box>
-    </Box>
+    </ThemeProvider>
   );
 };
 
