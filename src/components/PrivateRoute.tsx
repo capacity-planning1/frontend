@@ -2,14 +2,9 @@ import React from 'react'
 
 import { Navigate } from 'react-router-dom'
 
-const isAuthenticated = true
-//пока не реализована логика
+const PrivateRoute: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  const isAuthenticated = !!localStorage.getItem('access_token')
 
-interface PrivateRouteProps {
-  children: React.ReactNode
-}
-
-const PrivateRoute: React.FC<PrivateRouteProps> = ({ children }) => {
   if (!isAuthenticated) {
     return <Navigate to='/login' replace />
   }
