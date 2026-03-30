@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 
-import { useParams, Link } from 'react-router-dom'
+import { useParams, Link, useNavigate } from 'react-router-dom'
 
 import { client } from '../api/client'
 
@@ -15,6 +15,7 @@ interface Student {
 
 const StudentDetail: React.FC = () => {
   const { id } = useParams<{ id: string }>()
+  const navigate = useNavigate()
   const [student, setStudent] = useState<Student | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
@@ -119,7 +120,7 @@ const StudentDetail: React.FC = () => {
           setError('Ошибка удаления студента')
           console.error('API Error:', response.error)
         } else {
-          window.location.href = '/students'
+          navigate('/students')
         }
       } catch (err) {
         console.error('Delete error:', err)
