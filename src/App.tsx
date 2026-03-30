@@ -2,9 +2,6 @@ import React from 'react'
 
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
-import { ThemeProvider } from '@mui/material/styles';
-import { theme } from './styles/theme';
-
 import Navigation from './components/Navigation'
 import PrivateRoute from './components/PrivateRoute'
 import Home from './pages/Home'
@@ -15,7 +12,7 @@ import Projects from './pages/Projects'
 import Sprints from './pages/Sprints'
 import StudentDetail from './pages/StudentDetails'
 import Students from './pages/Students'
-import Tasks from './pages/TasksPage/Tasks'
+import Tasks from './pages/Tasks'
 import Teams from './pages/Teams'
 
 function App() {
@@ -101,9 +98,7 @@ function App() {
             path='/tasks'
             element={
               <PrivateRoute>
-                <ThemeProvider theme={theme}>
-                  <Tasks />
-                </ThemeProvider>
+                <Tasks />
               </PrivateRoute>
             }
           />
