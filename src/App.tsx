@@ -13,6 +13,7 @@ import Sprints from './pages/Sprints'
 import StudentDetail from './pages/StudentDetails'
 import Students from './pages/Students'
 import Tasks from './pages/Tasks'
+import TeamPage from './pages/TeamPage/TeamPage'
 import Teams from './pages/Teams'
 
 function App() {
@@ -81,6 +82,24 @@ function App() {
             element={
               <PrivateRoute>
                 <Teams />
+              </PrivateRoute>
+            }
+          />
+
+          <Route
+            path='/teams/:teamId'
+            element={
+              <PrivateRoute>
+                <Teams />
+              </PrivateRoute>
+            }
+          />
+
+          <Route
+            path='/teampage'
+            element={
+              <PrivateRoute>
+                <TeamPage />
               </PrivateRoute>
             }
           />
