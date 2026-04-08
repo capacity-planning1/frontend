@@ -1,15 +1,35 @@
 .TeamPage-Field_block {
     background-color: #403f3f;
-    height: 1080px;
-    width: 1920px;
+    width: 1746px;
+    margin: 0px auto;
+    padding: 40px 0;
 }
 
 .TeamPage-TeamBlock {
     background-color: black;
     height: 285px;
-    width: 701px;
+    width: 701px; 
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+     padding: 20px;
 }
 
 .TeamPage-Grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 40px; 
+    padding: 40px;
     color: white;
+}
+
+.TeamPage-Back_field {
+    margin: 0px;
+}
+
+.TeamPage-avatar {
+  width: 172px;
+  height: 172px;
+  background: lightgray;
+  border-radius: 50%;
 }
