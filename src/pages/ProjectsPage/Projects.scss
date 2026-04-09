@@ -1,0 +1,226 @@
+.my-projects-page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: #d9d9d9;
+
+  .projects-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 24px;
+    background-color: #716868;
+    color: #fff;
+    font-size: 20px;
+    font-weight: 400;
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      flex: 1;
+
+      .header-avatar {
+        flex: 0 0 40px;
+        height: 40px;
+        width: 40px;
+        border-radius: 50%;
+        overflow: hidden;
+        background: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        .header-logo {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+      }
+    }
+
+    .projects-tabs {
+      display: flex;
+      gap: 32px;
+      flex: 0 0 auto;
+
+      .projects-tab {
+        background: none;
+        border: none;
+        color: #b0b0b0;
+        font-size: 14px;
+        cursor: pointer;
+        padding: 6px 0;
+        transition: color 0.2s;
+
+        &.active {
+          color: #fff;
+          border-bottom: 2px solid #fff;
+        }
+        &:hover {
+          color: #fff;
+        }
+      }
+    }
+
+    .projects-logout {
+      background: none;
+      border: none;
+      color: #b0b0b0;
+      font-size: 14px;
+      cursor: pointer;
+      padding: 6px 12px;
+      transition: color 0.2s;
+
+      &:hover {
+        color: #fff;
+      }
+    }
+  }
+
+  .projects-content {
+    flex: 1;
+    padding: 48px 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-y: auto;
+  }
+}
+
+.projects-list {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 36px;
+  width: 100%;
+  max-width: 900px;
+}
+
+// Карточка проекта
+.project-card {
+  background-color: #000;
+  border-radius: 12px;
+  padding: 20px;
+  color: #fff;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  &:hover {
+    background-color: #1a1a1a;
+  }
+
+  .project-top {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+  }
+
+  .project-logo-wrapper {
+    flex-shrink: 0;
+    width: 56px;
+    height: 45px;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .project-logo {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  .project-info {
+    flex: 1;
+    min-width: 0;
+
+    .project-name {
+      font-size: 18px;
+      font-weight: 500;
+      color: #fff;
+      margin-bottom: 6px;
+    }
+
+    .project-description {
+      font-size: 14px;
+      color: #ccc;
+      line-height: 1.4;
+    }
+  }
+
+  .project-stats {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+
+    .stat-item {
+      font-size: 13px;
+      color: #fff;
+    }
+  }
+}
+
+// Карточка создания проекта
+.create-project-card {
+  background-color: #000;
+  border-radius: 12px;
+  padding: 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 90px;
+
+  &:hover {
+    background-color: #1a1a1a;
+  }
+
+  .create-project-text {
+    font-size: 16px;
+    font-weight: 500;
+    color: #fff;
+    text-align: center;
+  }
+}
+
+// Стили для загрузки
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 48px;
+
+  .loading-text {
+    color: #333;
+    font-size: 16px;
+  }
+}
+
+// Стили для ошибки
+.error-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  padding: 48px;
+
+  .error-text {
+    color: #d32f2f;
+    font-size: 16px;
+    text-align: center;
+  }
+}
