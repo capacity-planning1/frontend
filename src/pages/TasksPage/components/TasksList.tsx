@@ -1,27 +1,28 @@
-import { Box } from '@mui/material';
-import TaskCard from './TaskCard';
-import '../MyTasks.scss';
+import { Box } from '@mui/material'
+
+import TaskCard from './TaskCard'
+import '../MyTasks.scss'
 
 interface Task {
-  id: number;
-  title: string;
-  description: string;
-  remainingTime: string;
-  plannedTime: string;
+  id: number
+  title: string
+  description: string
+  remainingTime: string
+  plannedTime: string
 }
 
 interface TasksListProps {
-  tasks: Task[];
+  tasks: Task[]
 }
 
 const TasksList = ({ tasks }: TasksListProps) => {
   return (
-    <Box className="tasks-list">
+    <Box className='tasks-list'>
       {tasks.map((task) => (
         <TaskCard key={task.id} task={task} />
       ))}
     </Box>
-  );
-};
+  )
+}
 
-export default TasksList;
+export default TasksList
