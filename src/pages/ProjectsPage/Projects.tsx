@@ -1,10 +1,11 @@
 import { useState, useEffect } from 'react';
-import { Box, Paper, Button, ThemeProvider, CircularProgress, Typography } from '@mui/material';
-import { theme } from '../../styles/theme';
+import { Box, CircularProgress, Typography, Button } from '@mui/material';
 import './Projects.scss';
-import appLogo from '../../assets/images/app-logo.jpg';
+import AppHeader from '../components/AppHeader';
+import '../components/AppHeader.scss';
 import ProjectsList from './components/ProjectsList';
 import { client } from '../../api/client';
+import type { components } from '../../api/schema';
 
 export interface Project {
   id: number;
@@ -14,18 +15,9 @@ export interface Project {
   activeTasks: number;
 }
 
-// Интерфейс для ответа от API
-interface ProjectFromAPI {
-  id: number;
-  name: string;
-  description: string | null;
-  created_at: string;
-  owner_student_id: number;
-}
-
-// Мок-данные для людей и задач
-const MOCK_PEOPLE_COUNT = 5;
-const MOCK_ACTIVE_TASKS = 3;
+// Тип для ответа от API
+type ProjectResponse = components['schemas']['ProjectResponse'];
+type ProjectListResponse = components['schemas']['ProjectListResponse'];
 
 const Projects = () => {
   const [projects, setProjects] = useState<Project[]>([]);
@@ -50,21 +42,64 @@ const Projects = () => {
         if (response.error) {
           setError('Ошибка загрузки проектов');
           console.error('API Error:', response.error);
-        } else if (response.data) {
-          const data = response.data as { items: ProjectFromAPI[]; total: number; page: number; page_size: number };
-          
-          // Преобразуем данные из API в формат для карточек
-          // Добавляем мок-данные для peopleCount и activeTasks
-          const formattedProjects: Project[] = data.items.map((item) => ({
-            id: item.id,
-            name: item.name,
-            description: item.description || 'Описание отсутствует',
-            peopleCount: MOCK_PEOPLE_COUNT,
-            activeTasks: MOCK_ACTIVE_TASKS,
-          }));
-          
-          setProjects(formattedProjects);
+          return;
         }
+        
+        if (!response.data) {
+          setError('Нет данных от сервера');
+          return;
+        }
+
+        const data = response.data as ProjectListResponse;
+        
+        const formattedProjects: Project[] = await Promise.all(
+          data.items.map(async (item: ProjectResponse) => {
+            // Получаем количество участников проекта
+            let peopleCount = 0;
+            try {
+              const membersResponse = await client.GET('/projects/{project_id}/members', {
+                params: {
+                  path: { project_id: item.id },
+                  query: { page: 1, page_size: 100 }
+                }
+              });
+              if (membersResponse.data) {
+                peopleCount = membersResponse.data.items.length;
+              }
+            } catch (err) {
+              console.error(`Failed to fetch members for project ${item.id}:`, err);
+            }
+
+            // Получаем количество активных задач
+            let activeTasks = 0;
+            try {
+              const tasksResponse = await client.GET('/projects/{project_id}/tasks', {
+                params: {
+                  path: { project_id: item.id },
+                  query: { page: 1, page_size: 100 }
+                }
+              });
+              if (tasksResponse.data) {
+                // Считаем только задачи со статусом не "done"
+                activeTasks = tasksResponse.data.items.filter(
+                  task => task.status !== 'done'
+                ).length;
+              }
+            } catch (err) {
+              console.error(`Failed to fetch tasks for project ${item.id}:`, err);
+            }
+
+            return {
+              id: item.id,
+              name: item.name,
+              description: item.description || 'Описание отсутствует',
+              peopleCount,
+              activeTasks,
+            };
+          })
+        );
+        
+        setProjects(formattedProjects);
       } catch (err) {
         console.error('Fetch error:', err);
         if (err instanceof Error) {
@@ -80,123 +115,46 @@ const Projects = () => {
     fetchProjects();
   }, []);
 
-  // Состояние загрузки
   if (loading) {
     return (
-      <ThemeProvider theme={theme}>
-        <Box className="my-projects-page">
-          <Paper className="projects-header" elevation={0} square sx={{ borderRadius: 0 }}>
-            <Box className="header-left">
-              <Box className="header-avatar">
-                <Box component="img" src={appLogo} alt="Header logo" className="header-logo" />
-              </Box>
-              <Box className="projects-tabs">
-                <Button className="projects-tab active" disableRipple sx={{ textTransform: 'none' }}>
-                  Мои проекты
-                </Button>
-                <Button className="projects-tab" disableRipple sx={{ textTransform: 'none' }}>
-                  Мои задачи
-                </Button>
-              </Box>
-            </Box>
-            <Button className="projects-logout" disableRipple sx={{ textTransform: 'none' }}>
-              Выйти
-            </Button>
-          </Paper>
-          <Box className="projects-content">
-            <Box className="loading-container">
-              <CircularProgress />
-              <Typography className="loading-text">Загрузка проектов...</Typography>
-            </Box>
+      <Box className="my-projects-page">
+        <AppHeader />
+        <Box className="projects-content">
+          <Box className="loading-container">
+            <CircularProgress />
+            <Typography className="loading-text">Загрузка проектов...</Typography>
           </Box>
         </Box>
-      </ThemeProvider>
+      </Box>
     );
   }
 
-  // Состояние ошибки
   if (error) {
     return (
-      <ThemeProvider theme={theme}>
-        <Box className="my-projects-page">
-          <Paper className="projects-header" elevation={0} square sx={{ borderRadius: 0 }}>
-            <Box className="header-left">
-              <Box className="header-avatar">
-                <Box component="img" src={appLogo} alt="Header logo" className="header-logo" />
-              </Box>
-              <Box className="projects-tabs">
-                <Button className="projects-tab active" disableRipple sx={{ textTransform: 'none' }}>
-                  Мои проекты
-                </Button>
-                <Button className="projects-tab" disableRipple sx={{ textTransform: 'none' }}>
-                  Мои задачи
-                </Button>
-              </Box>
-            </Box>
-            <Button className="projects-logout" disableRipple sx={{ textTransform: 'none' }}>
-              Выйти
+      <Box className="my-projects-page">
+        <AppHeader />
+        <Box className="projects-content">
+          <Box className="error-container">
+            <Typography className="error-text">Ошибка: {error}</Typography>
+            <Button 
+              variant="outlined"
+              onClick={() => window.location.reload()}
+            >
+              Попробовать снова
             </Button>
-          </Paper>
-          <Box className="projects-content">
-            <Box className="error-container">
-              <Typography className="error-text">Ошибка: {error}</Typography>
-              <Button 
-                variant="outlined"
-                onClick={() => window.location.reload()}
-              >
-                Попробовать снова
-              </Button>
-            </Box>
           </Box>
         </Box>
-      </ThemeProvider>
+      </Box>
     );
   }
 
   return (
-    <ThemeProvider theme={theme}>
-      <Box className="my-projects-page">
-        <Paper className="projects-header" elevation={0} square sx={{ borderRadius: 0 }}>
-          <Box className="header-left">
-            <Box className="header-avatar">
-              <Box
-                component="img"
-                src={appLogo}
-                alt="Header logo"
-                className="header-logo"
-              />
-            </Box>
-            <Box className="projects-tabs">
-              <Button
-                className="projects-tab active"
-                disableRipple
-                sx={{ textTransform: 'none' }}
-              >
-                Мои проекты
-              </Button>
-              <Button
-                className="projects-tab"
-                disableRipple
-                sx={{ textTransform: 'none' }}
-              >
-                Мои задачи
-              </Button>
-            </Box>
-          </Box>
-          <Button
-            className="projects-logout"
-            disableRipple
-            sx={{ textTransform: 'none' }}
-          >
-            Выйти
-          </Button>
-        </Paper>
-
-        <Box className="projects-content">
-          <ProjectsList projects={projects} />
-        </Box>
+    <Box className="my-projects-page">
+      <AppHeader />
+      <Box className="projects-content">
+        <ProjectsList projects={projects} />
       </Box>
-    </ThemeProvider>
+    </Box>
   );
 };
 
