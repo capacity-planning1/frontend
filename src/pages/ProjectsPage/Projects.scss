@@ -8,28 +8,33 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+
     padding: 16px 24px;
-    background-color: #716868;
-    color: #fff;
+
     font-size: 20px;
     font-weight: 400;
+    color: #fff;
+
+    background-color: #716868;
 
     .header-left {
       display: flex;
-      align-items: center;
-      gap: 24px;
       flex: 1;
+      gap: 24px;
+      align-items: center;
 
       .header-avatar {
-        flex: 0 0 40px;
-        height: 40px;
-        width: 40px;
-        border-radius: 50%;
         overflow: hidden;
-        background: #fff;
         display: flex;
+        flex: 0 0 40px;
         align-items: center;
         justify-content: center;
+
+        width: 40px;
+        height: 40px;
+
+        background: #fff;
+        border-radius: 50%;
 
         .header-logo {
           width: 100%;
@@ -41,22 +46,27 @@
 
     .projects-tabs {
       display: flex;
-      gap: 32px;
       flex: 0 0 auto;
+      gap: 32px;
 
       .projects-tab {
+        cursor: pointer;
+
+        padding: 6px 0;
+
+        font-size: 14px;
+        color: #b0b0b0;
+
         background: none;
         border: none;
-        color: #b0b0b0;
-        font-size: 14px;
-        cursor: pointer;
-        padding: 6px 0;
+
         transition: color 0.2s;
 
         &.active {
           color: #fff;
           border-bottom: 2px solid #fff;
         }
+
         &:hover {
           color: #fff;
         }
@@ -64,12 +74,16 @@
     }
 
     .projects-logout {
+      cursor: pointer;
+
+      padding: 6px 12px;
+
+      font-size: 14px;
+      color: #b0b0b0;
+
       background: none;
       border: none;
-      color: #b0b0b0;
-      font-size: 14px;
-      cursor: pointer;
-      padding: 6px 12px;
+
       transition: color 0.2s;
 
       &:hover {
@@ -79,39 +93,45 @@
   }
 
   .projects-content {
-    flex: 1;
-    padding: 48px 24px;
+    overflow-y: auto;
     display: flex;
+    flex: 1;
     flex-direction: column;
     align-items: center;
-    overflow-y: auto;
+
+    padding: 48px 24px;
   }
 }
 
 .projects-list {
-  width: 100%;
   display: flex;
   justify-content: center;
+  width: 100%;
 }
 
 .projects-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 36px;
+
   width: 100%;
   max-width: 900px;
 }
 
 // Карточка проекта
 .project-card {
-  background-color: #000;
-  border-radius: 12px;
-  padding: 20px;
-  color: #fff;
   cursor: pointer;
+
   display: flex;
   flex-direction: column;
   gap: 16px;
+
+  padding: 20px;
+
+  color: #fff;
+
+  background-color: #000;
+  border-radius: 12px;
 
   &:hover {
     background-color: #1a1a1a;
@@ -124,15 +144,17 @@
   }
 
   .project-logo-wrapper {
-    flex-shrink: 0;
-    width: 56px;
-    height: 45px;
-    border-radius: 8px;
     overflow: hidden;
-    background: #fff;
     display: flex;
+    flex-shrink: 0;
     align-items: center;
     justify-content: center;
+
+    width: 56px;
+    height: 45px;
+
+    background: #fff;
+    border-radius: 8px;
 
     .project-logo {
       width: 100%;
@@ -146,16 +168,16 @@
     min-width: 0;
 
     .project-name {
+      margin-bottom: 6px;
       font-size: 18px;
       font-weight: 500;
       color: #fff;
-      margin-bottom: 6px;
     }
 
     .project-description {
       font-size: 14px;
-      color: #ccc;
       line-height: 1.4;
+      color: #ccc;
     }
   }
 
@@ -173,14 +195,17 @@
 
 // Карточка создания проекта
 .create-project-card {
-  background-color: #000;
-  border-radius: 12px;
-  padding: 20px;
   cursor: pointer;
+
   display: flex;
   align-items: center;
   justify-content: center;
+
   min-height: 90px;
+  padding: 20px;
+
+  background-color: #000;
+  border-radius: 12px;
 
   &:hover {
     background-color: #1a1a1a;
@@ -198,14 +223,15 @@
 .loading-container {
   display: flex;
   flex-direction: column;
+  gap: 16px;
   align-items: center;
   justify-content: center;
-  gap: 16px;
+
   padding: 48px;
 
   .loading-text {
-    color: #333;
     font-size: 16px;
+    color: #333;
   }
 }
 
@@ -213,14 +239,15 @@
 .error-container {
   display: flex;
   flex-direction: column;
+  gap: 20px;
   align-items: center;
   justify-content: center;
-  gap: 20px;
+
   padding: 48px;
 
   .error-text {
-    color: #d32f2f;
     font-size: 16px;
+    color: #d32f2f;
     text-align: center;
   }
 }

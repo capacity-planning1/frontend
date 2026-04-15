@@ -8,28 +8,33 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+
     padding: 16px 24px;
-    background-color: #716868;
-    color: #fff;
+
     font-size: 20px;
     font-weight: 400;
+    color: #fff;
+
+    background-color: #716868;
 
     .header-left {
       display: flex;
-      align-items: center;
-      gap: 24px;
       flex: 1;
+      gap: 24px;
+      align-items: center;
 
       .header-avatar {
-        flex: 0 0 40px;
-        height: 40px;
-        width: 40px;
-        border-radius: 50%;
         overflow: hidden;
-        background: #fff;
         display: flex;
+        flex: 0 0 40px;
         align-items: center;
         justify-content: center;
+
+        width: 40px;
+        height: 40px;
+
+        background: #fff;
+        border-radius: 50%;
 
         .header-logo {
           width: 100%;
@@ -41,22 +46,27 @@
 
     .tasks-tabs {
       display: flex;
-      gap: 32px;
       flex: 0 0 auto;
+      gap: 32px;
 
       .tasks-tab {
+        cursor: pointer;
+
+        padding: 6px 0;
+
+        font-size: 14px;
+        color: #b0b0b0;
+
         background: none;
         border: none;
-        color: #b0b0b0;
-        font-size: 14px;
-        cursor: pointer;
-        padding: 6px 0;
+
         transition: color 0.2s;
 
         &.active {
           color: #fff;
           border-bottom: 2px solid #fff;
         }
+
         &:hover {
           color: #fff;
         }
@@ -64,12 +74,16 @@
     }
 
     .tasks-logout {
+      cursor: pointer;
+
+      padding: 6px 12px;
+
+      font-size: 14px;
+      color: #b0b0b0;
+
       background: none;
       border: none;
-      color: #b0b0b0;
-      font-size: 14px;
-      cursor: pointer;
-      padding: 6px 12px;
+
       transition: color 0.2s;
 
       &:hover {
@@ -79,48 +93,55 @@
   }
 
   .tasks-content {
-    flex: 1;
-    padding: 48px 24px;
+    overflow-y: auto;
     display: flex;
+    flex: 1;
     flex-direction: column;
     align-items: center;
-    overflow-y: auto;
+
+    padding: 48px 24px;
   }
 }
 
 .tasks-list {
   width: 100%;
   max-width: 960px;
-  border-radius: 8px;
   padding: 0;
+
+  border-radius: 8px;
   box-shadow: none;
 }
 
 // Стили для TaskCard
 .task-card {
   display: flex;
-  align-items: flex-start;
   gap: 24px;
-  padding: 20px;
+  align-items: flex-start;
+
   margin-bottom: 20px;
+  padding: 20px;
+
+  color: #fff;
+
   background-color: #000;
   border-radius: 8px;
-  color: #fff;
 
   &:last-child {
     margin-bottom: 0;
   }
 
   .task-avatar {
-    flex: 0 0 40px;
-    height: 40px;
-    width: 40px;
-    border-radius: 50%;
     overflow: hidden;
-    background: #fff;
     display: flex;
+    flex: 0 0 40px;
     align-items: center;
     justify-content: center;
+
+    width: 40px;
+    height: 40px;
+
+    background: #fff;
+    border-radius: 50%;
 
     .project-logo {
       width: 100%;
@@ -135,22 +156,22 @@
     text-align: left;
 
     .task-title {
+      margin-bottom: 4px;
       font-size: 18px;
       font-weight: 500;
-      margin-bottom: 4px;
       color: #fff;
     }
 
     .task-description {
+      margin-bottom: 8px;
       font-size: 16px;
       color: #ccc;
-      margin-bottom: 8px;
     }
 
     .task-time {
+      margin-bottom: 4px;
       font-size: 14px;
       color: #aaa;
-      margin-bottom: 4px;
     }
 
     .task-time-values {
