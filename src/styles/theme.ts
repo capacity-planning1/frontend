@@ -1,4 +1,4 @@
-import { createTheme } from '@mui/material/styles';
+import { createTheme } from '@mui/material/styles'
 
 export const theme = createTheme({
   palette: {
@@ -24,11 +24,11 @@ export const theme = createTheme({
       400: '#b0b0b0',
     },
   },
-  
+
   typography: {
     fontFamily: 'Roboto, sans-serif',
   },
-  
+
   components: {
     MuiButton: {
       styleOverrides: {
@@ -62,4 +62,4 @@ export const theme = createTheme({
       },
     },
   },
-});
+})

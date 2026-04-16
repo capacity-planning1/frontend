@@ -125,4 +125,4 @@ const Tasks = () => {
   );
 };
 
-export default Tasks;
+export default Tasks
