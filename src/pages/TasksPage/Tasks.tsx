@@ -1,74 +1,128 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react';
+import { Box, CircularProgress, Typography, Button } from '@mui/material';
+import './MyTasks.scss';
+import AppHeader from '../components/AppHeader';
+import '../components/AppHeader.scss';
+import TasksList from './components/TasksList';
+import { client } from '../../api/client';
+import type { components } from '../../api/schema';
 
-import { Box, Paper, Button, ThemeProvider } from '@mui/material'
-
-import appLogo from '../../assets/images/app-logo.jpg'
-import { theme } from '../../styles/theme'
-import './MyTasks.scss'
-
-import TasksList from './components/TasksList'
-
-interface Task {
-  id: number
-  title: string
-  description: string
-  remainingTime: string
-  plannedTime: string
+export interface Task {
+  id: number;
+  title: string;
+  description: string;
+  remainingTime: string;
+  plannedTime: string;
 }
+
+// Мок-данные для времени
+const mockTimeStats = [
+  { remainingTime: '2 ч 15 мин', plannedTime: '4 ч 00 мин' },
+  { remainingTime: '1 ч 30 мин', plannedTime: '3 ч 00 мин' },
+  { remainingTime: '0 ч 45 мин', plannedTime: '2 ч 00 мин' },
+  { remainingTime: '3 ч 00 мин', plannedTime: '5 ч 00 мин' },
+];
 
 const Tasks = () => {
-  const [tasks] = useState<Task[]>([
-    {
-      id: 1,
-      title: 'Название задачи',
-      description: 'Описание',
-      remainingTime: '2 ч 15 мин',
-      plannedTime: '4 ч 00 мин',
-    },
-    {
-      id: 2,
-      title: 'Название задачи',
-      description: 'Описание',
-      remainingTime: '1 ч 30 мин',
-      plannedTime: '3 ч 00 мин',
-    },
-    {
-      id: 3,
-      title: 'Название задачи',
-      description: 'Описание',
-      remainingTime: '0 ч 45 мин',
-      plannedTime: '2 ч 00 мин',
-    },
-  ])
+  const [tasks, setTasks] = useState<Task[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
-  return (
-    <ThemeProvider theme={theme}>
-      <Box className='my-tasks-page'>
-        <Paper className='tasks-header' elevation={0} square sx={{ borderRadius: 0 }}>
-          <Box className='header-left'>
-            <Box className='header-avatar'>
-              <Box component='img' src={appLogo} alt='Header project logo' className='header-logo' />
-            </Box>
-            <Box className='tasks-tabs'>
-              <Button className='tasks-tab' disableRipple sx={{ textTransform: 'none' }}>
-                Мои проекты
-              </Button>
-              <Button className='tasks-tab active' disableRipple sx={{ textTransform: 'none' }}>
-                Мои задачи
-              </Button>
-            </Box>
+  useEffect(() => {
+    const fetchTasks = async () => {
+      try {
+        setLoading(true);
+        setError(null);
+        
+        const response = await client.GET('/projects/{project_id}/tasks', {
+          params: {
+            path: {
+              project_id: 1, // временно
+            },
+            query: {
+              page: 1,
+              page_size: 100,
+            },
+          },
+        });
+
+        if (response.error) {
+          setError('Ошибка загрузки задач');
+          console.error('API Error:', response.error);
+        } else if (response.data) {
+          const data = response.data as { 
+            items: components['schemas']['ProjectTaskResponse'][]; 
+            total: number; 
+            page: number; 
+            page_size: number 
+          };
+          
+          const formattedTasks: Task[] = data.items.map((item, index) => ({
+            id: item.id,
+            title: item.title,
+            description: item.description || 'Описание отсутствует',
+            remainingTime: mockTimeStats[index].remainingTime,
+            plannedTime: mockTimeStats[index].plannedTime,
+          }));
+          
+          setTasks(formattedTasks);
+        }
+      } catch (err) {
+        console.error('Fetch error:', err);
+        if (err instanceof Error) {
+          setError(err.message);
+        } else {
+          setError('Неизвестная ошибка');
+        }
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchTasks();
+  }, []);
+
+  if (loading) {
+    return (
+      <Box className="my-tasks-page">
+        <AppHeader />
+        <Box className="tasks-content">
+          <Box className="loading-container">
+            <CircularProgress />
+            <Typography className="loading-text">Загрузка задач...</Typography>
           </Box>
-          <Button className='tasks-logout' disableRipple sx={{ textTransform: 'none' }}>
-            Выйти
-          </Button>
-        </Paper>
-
-        <Box className='tasks-content'>
-          <TasksList tasks={tasks} />
         </Box>
       </Box>
-    </ThemeProvider>
-  )
-}
+    );
+  }
+
+  if (error) {
+    return (
+      <Box className="my-tasks-page">
+        <AppHeader />
+        <Box className="tasks-content">
+          <Box className="error-container">
+            <Typography className="error-text">Ошибка: {error}</Typography>
+            <Button 
+              variant="outlined"
+              onClick={() => window.location.reload()}
+            >
+              Попробовать снова
+            </Button>
+          </Box>
+        </Box>
+      </Box>
+    );
+  }
+
+  return (
+    <Box className="my-tasks-page">
+      <AppHeader />
+      <Box className="tasks-content">
+        <TasksList tasks={tasks} />
+      </Box>
+    </Box>
+  );
+};
 
 export default Tasks

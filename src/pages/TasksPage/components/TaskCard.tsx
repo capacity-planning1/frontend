@@ -1,9 +1,6 @@
 import { useState } from 'react'
-
 import { Box, Paper, Button, Typography } from '@mui/material'
-
 import projectLogo from '../../../assets/images/project-logo.jpg'
-
 import ReassignmentModal from './ReassignmentModal'
 import '../MyTasks.scss'
 
@@ -32,7 +29,6 @@ const TaskCard = ({ task }: TaskCardProps) => {
 
   const handleSubmitReassignment = (reason: string) => {
     console.log(`Запрос переназначения для задачи "${task.title}": ${reason}`)
-    // Здесь можно добавить API-вызов для отправки запроса
   }
 
   return (

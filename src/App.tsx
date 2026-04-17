@@ -1,6 +1,7 @@
 import React from 'react'
-
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { ThemeProvider } from '@mui/material'
+import { theme } from './styles/theme'
 
 import Navigation from './components/Navigation'
 import PrivateRoute from './components/PrivateRoute'
@@ -17,94 +18,88 @@ import Teams from './pages/Teams'
 
 function App() {
   return (
-    <BrowserRouter>
-      <Navigation />
-      <div style={{ padding: '20px' }}>
-        <Routes>
-          <Route path='/login' element={<Login />} />
-          <Route
-            path='/'
-            element={
-              <PrivateRoute>
-                <Home />
-              </PrivateRoute>
-            }
-          />
-
-          <Route
-            path='/profile'
-            element={
-              <PrivateRoute>
-                <Profile />
-              </PrivateRoute>
-            }
-          />
-
-          <Route
-            path='/projects'
-            element={
-              <PrivateRoute>
-                <Projects />
-              </PrivateRoute>
-            }
-          />
-
-          <Route
-            path='/projects/:id'
-            element={
-              <PrivateRoute>
-                <ProjectDetail />
-              </PrivateRoute>
-            }
-          />
-
-          <Route
-            path='/students'
-            element={
-              <PrivateRoute>
-                <Students />
-              </PrivateRoute>
-            }
-          />
-
-          <Route
-            path='/students/:id'
-            element={
-              <PrivateRoute>
-                <StudentDetail />
-              </PrivateRoute>
-            }
-          />
-
-          <Route
-            path='/teams'
-            element={
-              <PrivateRoute>
-                <Teams />
-              </PrivateRoute>
-            }
-          />
-
-          <Route
-            path='/sprints'
-            element={
-              <PrivateRoute>
-                <Sprints />
-              </PrivateRoute>
-            }
-          />
-
-          <Route
-            path='/tasks'
-            element={
-              <PrivateRoute>
-                <Tasks />
-              </PrivateRoute>
-            }
-          />
-        </Routes>
-      </div>
-    </BrowserRouter>
+    <ThemeProvider theme={theme}>
+      <BrowserRouter>
+        <Navigation />
+        <div style={{ padding: '20px' }}>
+          <Routes>
+            <Route path='/login' element={<Login />} />
+            <Route
+              path='/'
+              element={
+                <PrivateRoute>
+                  <Home />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path='/profile'
+              element={
+                <PrivateRoute>
+                  <Profile />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path='/projects'
+              element={
+                <PrivateRoute>
+                  <Projects />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path='/projects/:id'
+              element={
+                <PrivateRoute>
+                  <ProjectDetail />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path='/students'
+              element={
+                <PrivateRoute>
+                  <Students />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path='/students/:id'
+              element={
+                <PrivateRoute>
+                  <StudentDetail />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path='/teams'
+              element={
+                <PrivateRoute>
+                  <Teams />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path='/sprints'
+              element={
+                <PrivateRoute>
+                  <Sprints />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path='/tasks'
+              element={
+                <PrivateRoute>
+                  <Tasks />
+                </PrivateRoute>
+              }
+            />
+          </Routes>
+        </div>
+      </BrowserRouter>
+    </ThemeProvider>
   )
 }
 
