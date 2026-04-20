@@ -9,11 +9,11 @@ import Home from './pages/Home'
 import Login from './pages/Login'
 import Profile from './pages/Profile'
 import ProjectDetail from './pages/ProjectDetails'
-import Projects from './pages/Projects'
+import Projects from './pages/ProjectsPage/Projects'
 import Sprints from './pages/Sprints'
 import StudentDetail from './pages/StudentDetails'
 import Students from './pages/Students'
-import Tasks from './pages/Tasks'
+import Tasks from './pages/TasksPage/Tasks'
 import Teams from './pages/Teams'
 import { theme } from './styles/theme'
 
@@ -24,7 +24,10 @@ function App() {
         <Navigation />
         <div style={{ padding: '20px' }}>
           <Routes>
-            <Route path='/login' element={<Login />} />
+            <Route
+              path='/login'
+              element={<Login />}
+            />
             <Route
               path='/'
               element={
