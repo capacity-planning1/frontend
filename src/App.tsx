@@ -1,23 +1,103 @@
-// App.tsx - временная версия только для страницы Мои проекты
 import React from 'react'
-
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { ThemeProvider } from '@mui/material'
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
-
-import Projects from './pages/ProjectsPage/Projects'
 import { theme } from './styles/theme'
 
-// Импортируем только страницу проектов
+import Navigation from './components/Navigation'
+import PrivateRoute from './components/PrivateRoute'
+import Home from './pages/Home'
+import Login from './pages/Login'
+import Profile from './pages/Profile'
+import ProjectDetail from './pages/ProjectDetails'
+import Projects from './pages/Projects'
+import Sprints from './pages/Sprints'
+import StudentDetail from './pages/StudentDetails'
+import Students from './pages/Students'
+import Tasks from './pages/Tasks'
+import Teams from './pages/Teams'
 
 function App() {
   return (
     <ThemeProvider theme={theme}>
       <BrowserRouter>
-        <Routes>
-          {/* Все пути ведут на страницу проектов */}
-          <Route path='/' element={<Projects />} />
-          <Route path='*' element={<Navigate to='/' replace />} />
-        </Routes>
+        <Navigation />
+        <div style={{ padding: '20px' }}>
+          <Routes>
+            <Route path='/login' element={<Login />} />
+            <Route
+              path='/'
+              element={
+                <PrivateRoute>
+                  <Home />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path='/profile'
+              element={
+                <PrivateRoute>
+                  <Profile />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path='/projects'
+              element={
+                <PrivateRoute>
+                  <Projects />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path='/projects/:id'
+              element={
+                <PrivateRoute>
+                  <ProjectDetail />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path='/students'
+              element={
+                <PrivateRoute>
+                  <Students />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path='/students/:id'
+              element={
+                <PrivateRoute>
+                  <StudentDetail />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path='/teams'
+              element={
+                <PrivateRoute>
+                  <Teams />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path='/sprints'
+              element={
+                <PrivateRoute>
+                  <Sprints />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path='/tasks'
+              element={
+                <PrivateRoute>
+                  <Tasks />
+                </PrivateRoute>
+              }
+            />
+          </Routes>
+        </div>
       </BrowserRouter>
     </ThemeProvider>
   )
