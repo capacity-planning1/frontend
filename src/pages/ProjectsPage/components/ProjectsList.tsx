@@ -1,7 +1,10 @@
+import { useState } from 'react'
+
 import { Box, Button } from '@mui/material'
 
 import { Project } from '../Projects'
 
+import CreateProjectModal from './CreateProjectModal'
 import ProjectCard from './ProjectCard'
 import '../Projects.scss'
 
@@ -10,17 +13,35 @@ interface ProjectsListProps {
 }
 
 const ProjectsList = ({ projects }: ProjectsListProps) => {
+  const [isModalOpen, setIsModalOpen] = useState(false)
+
+  const handleOpenModal = () => {
+    setIsModalOpen(true)
+  }
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false)
+  }
+
+  const handleCreateProject = (projectData: { name: string; description: string; logo?: File }) => {
+    console.log('Создание проекта:', projectData)
+  }
+
   return (
-    <Box className='projects-list'>
-      <Box className='projects-grid'>
-        {projects.map((project) => (
-          <ProjectCard key={project.id} project={project} />
-        ))}
-        <Box className='create-project-card'>
-          <Button className='create-project-text'>Создать проект</Button>
+    <>
+      <Box className='projects-list'>
+        <Box className='projects-grid'>
+          {projects.map((project) => (
+            <ProjectCard key={project.id} project={project} />
+          ))}
+          <Box className='create-project-card' onClick={handleOpenModal}>
+            <Button className='create-project-text'>Создать проект</Button>
+          </Box>
         </Box>
       </Box>
-    </Box>
+
+      <CreateProjectModal open={isModalOpen} onClose={handleCloseModal} onCreate={handleCreateProject} />
+    </>
   )
 }
 

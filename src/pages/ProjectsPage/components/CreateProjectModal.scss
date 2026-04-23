@@ -1,0 +1,134 @@
+@import '../../styles/variables.scss';
+
+.create-project-modal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .create-project-modal-container {
+    width: 1025px;
+    height: 553px;
+    background-color:var(--color-card-bg);
+    display: flex;
+    flex-direction: column;
+
+    .create-project-modal-header {
+      display: flex;
+      justify-content: space-between;
+      padding: 20px 24px;
+
+      .modal-title {
+        font-size: 16px;
+        color: var(--color-text-light);
+      }
+
+      .close-btn {
+        color: var(--color-text-light);
+      }
+    }
+
+    .create-project-form {
+      padding: 0 24px 24px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+
+      .form-row {
+        display: flex;
+        gap: 24px;
+        margin-bottom: 24px;
+
+        .logo-upload {
+          width: 226px;
+          height: 141px;
+
+          .logo-preview {
+            width: 100%;
+            height: 100%;
+            background-color: var(--color-bg-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+
+            .upload-text {
+              font-size: 14px;
+              color: var(--color-upload-text);
+            }
+
+            .preview-image {
+              width: 100%;
+              height: 100%;
+              object-fit: cover;
+            }
+          }
+        }
+
+        .project-name-field {
+          flex: 1;
+
+          .MuiOutlinedInput-root {
+            background-color: var(--color-bg-light);
+            height: 46px;
+
+            fieldset {
+              border: none;
+            }
+          }
+
+           .MuiInputBase-input {
+            color:var(--color-text-main); 
+          }
+
+          .MuiInputLabel-root {
+            position: relative;
+            transform: none;
+            margin-bottom: 8px;
+            font-size: 14px;
+            color: var(--color-text-light);
+          }
+        }
+      }
+
+      .project-description-field {
+        margin-bottom: 24px;
+
+        .MuiOutlinedInput-root {
+          background-color: var(--color-bg-light);
+          min-height: 183px;
+
+          fieldset {
+            border: none;
+          }
+        }
+
+        .MuiInputBase-input {
+        color: var(--color-text-main); 
+        }        
+
+        .MuiInputLabel-root {
+          position: relative;
+          transform: none;
+          margin-bottom: 8px;
+          font-size: 14px;
+          color: white;
+        }
+      }
+
+      .modal-actions {
+        display: flex;
+        justify-content: center;
+        margin-top: auto;
+
+        .submit-btn {
+          width: 209px;
+          height: 52px;
+          background-color: var(--color-bg-light);
+          color: var(--color-text-main);
+          font-size: 16px;
+          text-transform: none;
+        }
+      }
+    }
+  }
+}
