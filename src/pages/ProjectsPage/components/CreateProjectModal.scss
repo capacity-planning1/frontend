@@ -1,4 +1,4 @@
-@import '../../styles/variables.scss';
+@import '../../../styles/variables';
 
 .create-project-modal {
   display: flex;
@@ -6,11 +6,13 @@
   justify-content: center;
 
   .create-project-modal-container {
-    width: 1025px;
-    height: 553px;
-    background-color:var(--color-card-bg);
     display: flex;
     flex-direction: column;
+
+    width: 1025px;
+    height: 553px;
+
+    background-color: var(--color-card-bg);
 
     .create-project-modal-header {
       display: flex;
@@ -28,10 +30,10 @@
     }
 
     .create-project-form {
-      padding: 0 24px 24px;
-      flex: 1;
       display: flex;
+      flex: 1;
       flex-direction: column;
+      padding: 0 24px 24px;
 
       .form-row {
         display: flex;
@@ -43,17 +45,20 @@
           height: 141px;
 
           .logo-preview {
-            width: 100%;
-            height: 100%;
-            background-color: var(--color-bg-light);
+            cursor: pointer;
+
             display: flex;
             align-items: center;
             justify-content: center;
-            cursor: pointer;
+
+            width: 100%;
+            height: 100%;
+
+            background-color: var(--color-bg-light);
 
             .upload-text {
               font-size: 14px;
-              color: var(--color-upload-text);
+              color: #666;
             }
 
             .preview-image {
@@ -67,23 +72,26 @@
         .project-name-field {
           flex: 1;
 
+          // MUI селекторы внутри .project-name-field
           .MuiOutlinedInput-root {
-            background-color: var(--color-bg-light);
             height: 46px;
+            background-color: var(--color-bg-light);
 
             fieldset {
               border: none;
             }
           }
 
-           .MuiInputBase-input {
-            color:var(--color-text-main); 
+          .MuiInputBase-input {
+            color: var(--color-text-main);
           }
 
           .MuiInputLabel-root {
             position: relative;
             transform: none;
+
             margin-bottom: 8px;
+
             font-size: 14px;
             color: var(--color-text-light);
           }
@@ -94,8 +102,8 @@
         margin-bottom: 24px;
 
         .MuiOutlinedInput-root {
-          background-color: var(--color-bg-light);
           min-height: 183px;
+          background-color: var(--color-bg-light);
 
           fieldset {
             border: none;
@@ -103,15 +111,17 @@
         }
 
         .MuiInputBase-input {
-        color: var(--color-text-main); 
-        }        
+          color: var(--color-text-main);
+        }
 
         .MuiInputLabel-root {
           position: relative;
           transform: none;
+
           margin-bottom: 8px;
+
           font-size: 14px;
-          color: white;
+          color: var(--color-text-light);
         }
       }
 
@@ -123,10 +133,12 @@
         .submit-btn {
           width: 209px;
           height: 52px;
-          background-color: var(--color-bg-light);
-          color: var(--color-text-main);
+
           font-size: 16px;
+          color: var(--color-text-main);
           text-transform: none;
+
+          background-color: var(--color-bg-light);
         }
       }
     }

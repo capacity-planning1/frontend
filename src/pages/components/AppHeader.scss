@@ -59,6 +59,21 @@
     }
   }
 
+  .header-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+
+  .notifications-icon {
+    color: var(--color-inactive-tab);
+    padding: 8px;
+    
+    &:hover {
+      color: var(--color-text-light);
+    }
+  }
+}
+
   .header-logout {
     background: none;
     border: none;
