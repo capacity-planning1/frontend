@@ -1,0 +1,118 @@
+@import '../../styles/variables.scss';
+
+.notifications-modal {
+  display: flex;
+  justify-content: flex-end;
+
+  .notifications-modal-container {
+    width: 424px;
+    height: 893px;
+    background-color: var(--color-card-bg);
+    display: flex;
+    flex-direction: column;
+    margin-top: 105px;
+    margin-right: 30px;
+    
+
+    .notifications-modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 24px;
+      border-bottom: 1px solid var(--color-border-separator);
+
+      .modal-title {
+        font-size: 18px;
+        color: var(--color-text-light);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+
+        .unread-badge {
+          background-color: var(--color-unread-badge-bg);
+          color: var(--color-unread-badge-text);
+          font-size: 12px;
+          padding: 2px 8px;
+          border-radius: 12px;
+        }
+      }
+
+      .close-btn {
+        color: var(--color-text-light);
+      }
+    }
+
+    .notifications-list {
+      flex: 1;
+      overflow-y: auto;
+
+      .empty-text {
+        text-align: center;
+        color: var(--color-notification-empty);
+        padding: 40px;
+      }
+
+      .notification-item {
+        width: 384px;
+        min-height: 131px;
+        margin: 12px auto;
+        background-color: var(--color-notification-bg);
+        cursor: pointer;
+        padding: 12px 16px;
+
+        &:hover {
+          opacity: 0.9;
+        }
+
+        &.unread {
+          border-left: 4px solid var(--color-notification-unread-border);
+        }
+
+        .notification-header {
+          display: flex;
+          justify-content: space-between;
+          margin-bottom: 8px;
+
+          .notification-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--color-notification-title);
+          }
+
+          .notification-date {
+            font-size: 10px;
+            color: var(--color-notification-date);
+          }
+        }
+
+        .notification-message {
+          font-size: 12px;
+          color: var(--color-notification-message);
+        }
+      }
+    }
+
+    .loading-container,
+    .error-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      flex: 1;
+      gap: 16px;
+
+      .loading-text {
+        color: var(--color-loading-text);
+        font-size: 16px;
+      }
+
+      .error-text {
+        color: var(--color-error);
+        font-size: 16px;
+        text-align: center;
+        padding: 20px;
+      }
+    }
+
+  }
+}

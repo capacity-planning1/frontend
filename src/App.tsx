@@ -1,7 +1,7 @@
 import React from 'react'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+
 import { ThemeProvider } from '@mui/material'
-import { theme } from './styles/theme'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
 import Navigation from './components/Navigation'
 import PrivateRoute from './components/PrivateRoute'
@@ -15,6 +15,7 @@ import StudentDetail from './pages/StudentDetails'
 import Students from './pages/Students'
 import Tasks from './pages/Tasks'
 import Teams from './pages/Teams'
+import { theme } from './styles/theme'
 
 function App() {
   return (
