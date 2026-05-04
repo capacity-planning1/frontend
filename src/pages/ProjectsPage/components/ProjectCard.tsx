@@ -1,4 +1,5 @@
 import { Box, Paper, Typography } from '@mui/material'
+import { useNavigate } from 'react-router-dom'
 
 import projectLogo from '../../../assets/images/project-logo.jpg'
 
@@ -15,8 +16,14 @@ interface ProjectCardProps {
 }
 
 const ProjectCard = ({ project }: ProjectCardProps) => {
+  const navigate = useNavigate()
+
+  const handleClick = () => {
+    navigate(`/sprint-board?projectId=${project.id}`)
+  }
+
   return (
-    <Paper className='project-card' elevation={0}>
+    <Paper className='project-card' elevation={0} onClick={handleClick}>
       <Box className='project-top'>
         <Box className='project-logo-wrapper'>
           <Box component='img' src={projectLogo} alt='Project logo' className='project-logo' />

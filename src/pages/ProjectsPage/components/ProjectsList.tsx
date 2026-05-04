@@ -1,6 +1,7 @@
 import { useState } from 'react'
 
 import { Box, Button } from '@mui/material'
+import { useNavigate } from 'react-router-dom'
 
 import { Project } from '../Projects'
 
@@ -13,6 +14,7 @@ interface ProjectsListProps {
 }
 
 const ProjectsList = ({ projects }: ProjectsListProps) => {
+  const navigate = useNavigate()
   const [isModalOpen, setIsModalOpen] = useState(false)
 
   const handleOpenModal = () => {
@@ -25,6 +27,9 @@ const ProjectsList = ({ projects }: ProjectsListProps) => {
 
   const handleCreateProject = (projectData: { name: string; description: string; logo?: File }) => {
     console.log('Создание проекта:', projectData)
+    const newProjectId = 1 // пока что
+    navigate(`/sprint-board?projectId=${newProjectId}`)
+    handleCloseModal()
   }
 
   return (
