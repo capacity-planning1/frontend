@@ -1,6 +1,9 @@
 import { useState } from 'react'
+
 import { Box, Paper, Button, Typography } from '@mui/material'
+
 import projectLogo from '../../../assets/images/project-logo.jpg'
+
 import ReassignmentModal from './ReassignmentModal'
 import '../MyTasks.scss'
 

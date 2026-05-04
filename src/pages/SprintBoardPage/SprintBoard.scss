@@ -1,0 +1,126 @@
+@import '../../styles/variables.scss';
+
+.sprint-board-page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: var(--color-bg-light);
+
+  .sprint-board-content {
+    flex: 1;
+    padding: 48px 24px;
+    display: flex;
+    overflow-x: auto;
+    justify-content: center;
+  }
+}
+
+.columns-wrapper {
+  display: flex;
+  gap: 133px;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.task-column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 252px;
+}
+
+.button-area {
+  height: 62px;
+  margin-bottom: 16px;
+  display: flex;
+  justify-content: center;
+}
+
+button.column-button.MuiButton-root {
+  width: 228px;
+  height: 46px;
+  background-color: var(--color-card-bg);
+  color: var(--color-unread-badge-text);
+  font-family: Inter;
+  font-size: 24px;
+  border-radius: 0;
+}
+
+.button-placeholder {
+  width: 228px;
+  height: 46px;
+}
+
+.column-title {
+  font-family: Inter;
+  font-size: 24px;
+  margin-bottom: 16px;
+  height: 29px;
+}
+
+.tasks-container {
+  width: 252px;
+  height: 722px;
+  background-color: var(--color-card-bg);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  border-radius: 0;
+}
+
+.task-card.MuiPaper-root {
+  width: 225px;
+  min-height: 92px;
+  background-color: var(--color-bg-light);
+  padding: 15px 14px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-radius: 0px;
+
+  .task-number {
+    font-family: Inter;
+    font-size: 24px;
+    color: var(--color-unread-badge-text);
+    margin-bottom: 15px;
+  }
+
+  .task-assignee {
+    font-family: Inter;
+    font-size: 24px;
+    color: var(--color-unread-badge-text);
+  }
+}
+
+// Стили для загрузки
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 48px;
+
+  .loading-text {
+    color: var(--color-loading-text);
+    font-size: 16px;
+  }
+}
+
+// Стили для ошибки
+.error-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  padding: 48px;
+
+  .error-text {
+    color: var(--color-error);
+    font-size: 16px;
+    text-align: center;
+  }
+}
