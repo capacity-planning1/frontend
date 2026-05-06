@@ -5,8 +5,8 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
 import Navigation from './components/Navigation'
 import PrivateRoute from './components/PrivateRoute'
+import AuthPage from './pages/authPage/AuthPage'
 import Home from './pages/Home'
-import Login from './pages/Login'
 import Profile from './pages/Profile'
 import ProjectDetail from './pages/ProjectDetails'
 import Projects from './pages/ProjectsPage/Projects'
@@ -26,7 +26,7 @@ function App() {
           <Routes>
             <Route
               path='/login'
-              element={<Login />}
+              element={<AuthPage />}
             />
             <Route
               path='/'
