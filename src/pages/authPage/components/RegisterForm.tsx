@@ -8,8 +8,20 @@ function RegisterForm({ onSwitch }: RegisterFormProps) {
       <Typography className='form-block__tab'>регистрация</Typography>
 
       <Box className='form-block__fields'>
-        <TextField fullWidth size='small' variant='filled' label='Имя' InputProps={{ disableUnderline: true }} />
-        <TextField fullWidth size='small' variant='filled' label='Email' InputProps={{ disableUnderline: true }} />
+        <TextField
+          fullWidth
+          size='small'
+          variant='filled'
+          label='Имя'
+          InputProps={{ disableUnderline: true }}
+        />
+        <TextField
+          fullWidth
+          size='small'
+          variant='filled'
+          label='Email'
+          InputProps={{ disableUnderline: true }}
+        />
         <TextField
           fullWidth
           size='small'
@@ -20,11 +32,18 @@ function RegisterForm({ onSwitch }: RegisterFormProps) {
         />
       </Box>
 
-      <Button variant='text' className='form-block__submit'>
+      <Button
+        variant='text'
+        className='form-block__submit'
+      >
         Зарегистрироваться
       </Button>
 
-      <Button variant='text' className='form-block__switch-mobile' onClick={onSwitch}>
+      <Button
+        variant='text'
+        className='form-block__switch-mobile'
+        onClick={onSwitch}
+      >
         У меня уже есть аккаунт
       </Button>
     </div>

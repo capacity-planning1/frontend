@@ -26,7 +26,8 @@
         "trailingComma": "all",
         "bracketSpacing": true,
         "arrowParens": "always",
-        "endOfLine": "auto"
+        "endOfLine": "auto",
+        "singleAttributePerLine": true
       }
     ],
     "import/order": [

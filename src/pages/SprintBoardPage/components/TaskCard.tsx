@@ -13,7 +13,10 @@ interface TaskCardProps {
 
 const TaskCard = ({ task }: TaskCardProps) => {
   return (
-    <Paper className='task-card' elevation={0}>
+    <Paper
+      className='task-card'
+      elevation={0}
+    >
       <Typography className='task-number'>{task.number}</Typography>
       <Typography className='task-assignee'>{task.assignee}</Typography>
     </Paper>

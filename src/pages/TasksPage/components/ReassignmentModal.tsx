@@ -21,16 +21,28 @@ const ReassignmentModal = ({ open, onClose, onSubmit }: ReassignmentModalProps) 
   }
 
   return (
-    <Modal open={open} onClose={onClose} className='reassignment-modal' aria-labelledby='reassignment-modal-title'>
+    <Modal
+      open={open}
+      onClose={onClose}
+      className='reassignment-modal'
+      aria-labelledby='reassignment-modal-title'
+    >
       <Box className='reassignment-modal-container'>
         <Box className='reassignment-modal-header'>
           <Typography className='reason-label'>Укажите причину</Typography>
-          <IconButton onClick={onClose} className='close-btn' aria-label='Закрыть'>
+          <IconButton
+            onClick={onClose}
+            className='close-btn'
+            aria-label='Закрыть'
+          >
             <CloseIcon />
           </IconButton>
         </Box>
 
-        <form onSubmit={handleSubmit} className='reassignment-form'>
+        <form
+          onSubmit={handleSubmit}
+          className='reassignment-form'
+        >
           <TextField
             name='reason'
             multiline
@@ -42,7 +54,11 @@ const ReassignmentModal = ({ open, onClose, onSubmit }: ReassignmentModalProps) 
           />
 
           <Box className='modal-actions'>
-            <Button type='submit' variant='contained' className='submit-btn'>
+            <Button
+              type='submit'
+              variant='contained'
+              className='submit-btn'
+            >
               Отправить
             </Button>
           </Box>

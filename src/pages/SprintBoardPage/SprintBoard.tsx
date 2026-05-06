@@ -153,7 +153,10 @@ const SprintBoard = () => {
         <Box className='sprint-board-content'>
           <Box className='error-container'>
             <Typography className='error-text'>Ошибка: {error}</Typography>
-            <Button variant='outlined' onClick={() => fetchTasks()}>
+            <Button
+              variant='outlined'
+              onClick={() => fetchTasks()}
+            >
               Попробовать снова
             </Button>
           </Box>

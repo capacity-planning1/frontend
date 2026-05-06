@@ -24,7 +24,10 @@ const TaskColumn = ({ title, tasks, hasButton, buttonText, onButtonClick }: Task
     <Box className='task-column'>
       <Box className='button-area'>
         {hasButton ? (
-          <Button className='column-button' onClick={onButtonClick}>
+          <Button
+            className='column-button'
+            onClick={onButtonClick}
+          >
             {buttonText}
           </Button>
         ) : (
@@ -36,7 +39,10 @@ const TaskColumn = ({ title, tasks, hasButton, buttonText, onButtonClick }: Task
 
       <Box className='tasks-container'>
         {tasks.map((task) => (
-          <TaskCard key={task.id} task={task} />
+          <TaskCard
+            key={task.id}
+            task={task}
+          />
         ))}
       </Box>
     </Box>

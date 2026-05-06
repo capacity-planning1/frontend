@@ -46,16 +46,27 @@ const CreateProjectModal = ({ open, onClose, onCreate }: CreateProjectModalProps
   }
 
   return (
-    <Modal open={open} onClose={handleClose} className='create-project-modal'>
+    <Modal
+      open={open}
+      onClose={handleClose}
+      className='create-project-modal'
+    >
       <Box className='create-project-modal-container'>
         <Box className='create-project-modal-header'>
           <Typography className='modal-title'>Создать проект</Typography>
-          <IconButton onClick={handleClose} className='close-btn' aria-label='Закрыть'>
+          <IconButton
+            onClick={handleClose}
+            className='close-btn'
+            aria-label='Закрыть'
+          >
             <CloseIcon />
           </IconButton>
         </Box>
 
-        <form onSubmit={handleSubmit} className='create-project-form'>
+        <form
+          onSubmit={handleSubmit}
+          className='create-project-form'
+        >
           <Box className='form-row'>
             <Box className='logo-upload'>
               <input
@@ -68,7 +79,11 @@ const CreateProjectModal = ({ open, onClose, onCreate }: CreateProjectModalProps
               <label htmlFor='logo-upload'>
                 <Box className='logo-preview'>
                   {logoPreview ? (
-                    <img src={logoPreview} alt='Project logo preview' className='preview-image' />
+                    <img
+                      src={logoPreview}
+                      alt='Project logo preview'
+                      className='preview-image'
+                    />
                   ) : (
                     <Typography className='upload-text'>Логотип проекта</Typography>
                   )}
@@ -76,7 +91,13 @@ const CreateProjectModal = ({ open, onClose, onCreate }: CreateProjectModalProps
               </label>
             </Box>
 
-            <TextField name='name' label='Название проекта' className='project-name-field' required fullWidth />
+            <TextField
+              name='name'
+              label='Название проекта'
+              className='project-name-field'
+              required
+              fullWidth
+            />
           </Box>
 
           <TextField
@@ -89,7 +110,11 @@ const CreateProjectModal = ({ open, onClose, onCreate }: CreateProjectModalProps
           />
 
           <Box className='modal-actions'>
-            <Button type='submit' variant='contained' className='submit-btn'>
+            <Button
+              type='submit'
+              variant='contained'
+              className='submit-btn'
+            >
               Создать проект
             </Button>
           </Box>

@@ -61,7 +61,11 @@ const NotificationsModal = ({ open, onClose }: NotificationsModalProps) => {
 
   if (loading) {
     return (
-      <Modal open={open} onClose={onClose} className='notifications-modal'>
+      <Modal
+        open={open}
+        onClose={onClose}
+        className='notifications-modal'
+      >
         <Box className='notifications-modal-container'>
           <Box className='loading-container'>
             <CircularProgress />
@@ -74,7 +78,11 @@ const NotificationsModal = ({ open, onClose }: NotificationsModalProps) => {
 
   if (error) {
     return (
-      <Modal open={open} onClose={onClose} className='notifications-modal'>
+      <Modal
+        open={open}
+        onClose={onClose}
+        className='notifications-modal'
+      >
         <Box className='notifications-modal-container'>
           <Box className='error-container'>
             <Typography className='error-text'>{error}</Typography>
@@ -85,14 +93,21 @@ const NotificationsModal = ({ open, onClose }: NotificationsModalProps) => {
   }
 
   return (
-    <Modal open={open} onClose={onClose} className='notifications-modal'>
+    <Modal
+      open={open}
+      onClose={onClose}
+      className='notifications-modal'
+    >
       <Box className='notifications-modal-container'>
         <Box className='notifications-modal-header'>
           <Typography className='modal-title'>
             Уведомления
             {unreadCount > 0 && <span className='unread-badge'>{unreadCount}</span>}
           </Typography>
-          <IconButton onClick={onClose} className='close-btn'>
+          <IconButton
+            onClick={onClose}
+            className='close-btn'
+          >
             <CloseIcon />
           </IconButton>
         </Box>

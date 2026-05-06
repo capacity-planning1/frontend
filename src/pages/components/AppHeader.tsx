@@ -20,33 +20,70 @@ const AppHeader = () => {
   }
   return (
     <>
-      <Paper className='app-header' elevation={0} square sx={{ borderRadius: 0 }}>
+      <Paper
+        className='app-header'
+        elevation={0}
+        square
+        sx={{ borderRadius: 0 }}
+      >
         <Box className='header-left'>
           <Box className='header-avatar'>
-            <Box component='img' src={appLogo} alt='Header logo' className='header-logo' />
+            <Box
+              component='img'
+              src={appLogo}
+              alt='Header logo'
+              className='header-logo'
+            />
           </Box>
           <Box className='header-tabs'>
-            <Button component={Link} to='/projects' className='header-tab' disableRipple sx={{ textTransform: 'none' }}>
+            <Button
+              component={Link}
+              to='/projects'
+              className='header-tab'
+              disableRipple
+              sx={{ textTransform: 'none' }}
+            >
               Мои проекты
             </Button>
-            <Button component={Link} to='/tasks' className='header-tab' disableRipple sx={{ textTransform: 'none' }}>
+            <Button
+              component={Link}
+              to='/tasks'
+              className='header-tab'
+              disableRipple
+              sx={{ textTransform: 'none' }}
+            >
               Мои задачи
             </Button>
           </Box>
         </Box>
         <Box className='header-right'>
-          <IconButton className='notifications-icon' onClick={handleOpenNotifications}>
-            <Badge variant='dot' color='error'>
+          <IconButton
+            className='notifications-icon'
+            onClick={handleOpenNotifications}
+          >
+            <Badge
+              variant='dot'
+              color='error'
+            >
               <NotificationsNoneIcon />
             </Badge>
           </IconButton>
 
-          <Button component={Link} to='/login' className='header-logout' disableRipple sx={{ textTransform: 'none' }}>
+          <Button
+            component={Link}
+            to='/login'
+            className='header-logout'
+            disableRipple
+            sx={{ textTransform: 'none' }}
+          >
             Выйти
           </Button>
         </Box>
       </Paper>
-      <NotificationsModal open={isNotificationsOpen} onClose={handleCloseNotifications} />
+      <NotificationsModal
+        open={isNotificationsOpen}
+        onClose={handleCloseNotifications}
+      />
     </>
   )
 }

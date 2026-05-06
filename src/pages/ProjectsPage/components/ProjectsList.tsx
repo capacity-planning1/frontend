@@ -37,15 +37,25 @@ const ProjectsList = ({ projects }: ProjectsListProps) => {
       <Box className='projects-list'>
         <Box className='projects-grid'>
           {projects.map((project) => (
-            <ProjectCard key={project.id} project={project} />
+            <ProjectCard
+              key={project.id}
+              project={project}
+            />
           ))}
-          <Box className='create-project-card' onClick={handleOpenModal}>
+          <Box
+            className='create-project-card'
+            onClick={handleOpenModal}
+          >
             <Button className='create-project-text'>Создать проект</Button>
           </Box>
         </Box>
       </Box>
 
-      <CreateProjectModal open={isModalOpen} onClose={handleCloseModal} onCreate={handleCreateProject} />
+      <CreateProjectModal
+        open={isModalOpen}
+        onClose={handleCloseModal}
+        onCreate={handleCreateProject}
+      />
     </>
   )
 }
