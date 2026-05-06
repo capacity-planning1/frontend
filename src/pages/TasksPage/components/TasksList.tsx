@@ -19,7 +19,10 @@ const TasksList = ({ tasks }: TasksListProps) => {
   return (
     <Box className='tasks-list'>
       {tasks.map((task) => (
-        <TaskCard key={task.id} task={task} />
+        <TaskCard
+          key={task.id}
+          task={task}
+        />
       ))}
     </Box>
   )

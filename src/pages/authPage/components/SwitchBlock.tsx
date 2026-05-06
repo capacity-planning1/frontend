@@ -13,7 +13,11 @@ function SwitchBlock({ tab, message, onClick }: SwitchBlockProps) {
 
       <Typography className='switch-block__message'>{message}</Typography>
 
-      <Button variant='text' className='switch-block__action' onClick={onClick}>
+      <Button
+        variant='text'
+        className='switch-block__action'
+        onClick={onClick}
+      >
         Перейти
       </Button>
     </div>

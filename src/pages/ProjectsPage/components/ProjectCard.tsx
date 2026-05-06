@@ -23,10 +23,19 @@ const ProjectCard = ({ project }: ProjectCardProps) => {
   }
 
   return (
-    <Paper className='project-card' elevation={0} onClick={handleClick}>
+    <Paper
+      className='project-card'
+      elevation={0}
+      onClick={handleClick}
+    >
       <Box className='project-top'>
         <Box className='project-logo-wrapper'>
-          <Box component='img' src={projectLogo} alt='Project logo' className='project-logo' />
+          <Box
+            component='img'
+            src={projectLogo}
+            alt='Project logo'
+            className='project-logo'
+          />
         </Box>
 
         <Box className='project-info'>

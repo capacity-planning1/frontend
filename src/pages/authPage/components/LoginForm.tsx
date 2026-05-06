@@ -66,7 +66,11 @@ function LoginForm({ onSwitch }: LoginFormProps) {
         />
       </Box>
 
-      <FormControlLabel className='form-block__checkbox' control={<Checkbox size='small' />} label='запомнить меня' />
+      <FormControlLabel
+        className='form-block__checkbox'
+        control={<Checkbox size='small' />}
+        label='запомнить меня'
+      />
 
       {error && (
         <Typography
@@ -87,7 +91,11 @@ function LoginForm({ onSwitch }: LoginFormProps) {
         Войти
       </Button>
 
-      <Button variant='text' className='form-block__switch-mobile' onClick={onSwitch}>
+      <Button
+        variant='text'
+        className='form-block__switch-mobile'
+        onClick={onSwitch}
+      >
         У меня нет аккаунта
       </Button>
     </form>

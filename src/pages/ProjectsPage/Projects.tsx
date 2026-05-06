@@ -137,7 +137,10 @@ const Projects = () => {
         <Box className='projects-content'>
           <Box className='error-container'>
             <Typography className='error-text'>Ошибка: {error}</Typography>
-            <Button variant='outlined' onClick={() => window.location.reload()}>
+            <Button
+              variant='outlined'
+              onClick={() => window.location.reload()}
+            >
               Попробовать снова
             </Button>
           </Box>

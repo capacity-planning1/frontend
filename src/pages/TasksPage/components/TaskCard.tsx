@@ -36,9 +36,17 @@ const TaskCard = ({ task }: TaskCardProps) => {
 
   return (
     <>
-      <Paper className='task-card' elevation={0}>
+      <Paper
+        className='task-card'
+        elevation={0}
+      >
         <Box className='task-avatar'>
-          <Box component='img' src={projectLogo} alt='Project logo' className='project-logo' />
+          <Box
+            component='img'
+            src={projectLogo}
+            alt='Project logo'
+            className='project-logo'
+          />
         </Box>
 
         <Box className='task-info'>
@@ -51,16 +59,29 @@ const TaskCard = ({ task }: TaskCardProps) => {
         </Box>
 
         <Box className='task-actions'>
-          <Button variant='outlined' size='small' className='action-btn'>
+          <Button
+            variant='outlined'
+            size='small'
+            className='action-btn'
+          >
             принять задачу
           </Button>
-          <Button variant='outlined' size='small' className='action-btn' onClick={handleOpenModal}>
+          <Button
+            variant='outlined'
+            size='small'
+            className='action-btn'
+            onClick={handleOpenModal}
+          >
             запросить переназначение
           </Button>
         </Box>
       </Paper>
 
-      <ReassignmentModal open={isModalOpen} onClose={handleCloseModal} onSubmit={handleSubmitReassignment} />
+      <ReassignmentModal
+        open={isModalOpen}
+        onClose={handleCloseModal}
+        onSubmit={handleSubmitReassignment}
+      />
     </>
   )
 }
