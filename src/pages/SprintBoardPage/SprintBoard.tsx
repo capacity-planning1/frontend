@@ -8,6 +8,7 @@ import type { components } from '../../api/schema'
 import AppHeader from '../components/AppHeader'
 
 import TaskColumn from './components/TaskColumn'
+import CreateTaskModal from './components/CreateTaskModal'
 import '../components/AppHeader.scss'
 import './SprintBoard.scss'
 
@@ -41,6 +42,7 @@ const SprintBoard = () => {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
   const [projectId, setProjectId] = useState<number | null>(null)
+  const [isCreateModalOpen, setIsCreateModalOpen] = useState(false)
 
   const [searchParams] = useSearchParams()
 
@@ -102,7 +104,17 @@ const SprintBoard = () => {
   }
 
   const handleCreateTask = () => {
-    console.log('Создать задачу')
+    setIsCreateModalOpen(true)
+  }
+
+  const handleCloseCreateModal = () => {
+    setIsCreateModalOpen(false)
+  }
+
+  const handleCreateTaskSubmit = async (data: { name: string; description: string; time: string; performer: string }) => {
+    console.log('Создание задачи:', data)
+    await fetchTasks() // обновить список задач после создания новой
+    handleCloseCreateModal()
   }
 
   const handleInvite = () => {
@@ -179,6 +191,11 @@ const SprintBoard = () => {
           ))}
         </Box>
       </Box>
+      <CreateTaskModal
+        open={isCreateModalOpen}
+        onClose={handleCloseCreateModal}
+        onSubmit={handleCreateTaskSubmit}
+      />
     </Box>
   )
 }
