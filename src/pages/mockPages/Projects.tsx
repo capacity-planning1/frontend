@@ -6,7 +6,7 @@ import './Projects.scss'
 import AppHeader from '../components/AppHeader'
 
 import '../components/AppHeader.scss'
-import ProjectsList from './components/ProjectsList'
+import ProjectsList from '../ProjectsPage/components/ProjectsList'
 
 export interface Project {
   id: number

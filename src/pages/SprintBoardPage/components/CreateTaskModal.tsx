@@ -1,11 +1,11 @@
-import { Box, Modal, TextField } from '@mui/material';
+import { Box, Modal, TextField } from '@mui/material'
 
-import './CreateTaskModal.scss';
+import './CreateTaskModal.scss'
 
 interface CreateTaskModalProps {
-  open: boolean;
-  onClose: () => void;
-  onSubmit?: (data: { name: string; description: string; time: string; performer: string }) => void;
+  open: boolean
+  onClose: () => void
+  onSubmit?: (data: { name: string; description: string; time: string; performer: string }) => void
 }
 
 const CreateTaskModal = ({ open, onClose }: CreateTaskModalProps) => {
@@ -33,7 +33,7 @@ const CreateTaskModal = ({ open, onClose }: CreateTaskModalProps) => {
         </Box>
       </Box>
     </Modal>
-  );
-};
+  )
+}
 
-export default CreateTaskModal;
+export default CreateTaskModal
