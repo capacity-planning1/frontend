@@ -7,8 +7,8 @@ import { client } from '../../api/client'
 import type { components } from '../../api/schema'
 import AppHeader from '../components/AppHeader'
 
-import TaskColumn from './components/TaskColumn'
 import CreateTaskModal from './components/CreateTaskModal'
+import TaskColumn from './components/TaskColumn'
 import '../components/AppHeader.scss'
 import './SprintBoard.scss'
 
@@ -111,7 +111,12 @@ const SprintBoard = () => {
     setIsCreateModalOpen(false)
   }
 
-  const handleCreateTaskSubmit = async (data: { name: string; description: string; time: string; performer: string }) => {
+  const handleCreateTaskSubmit = async (data: {
+    name: string
+    description: string
+    time: string
+    performer: string
+  }) => {
     console.log('Создание задачи:', data)
     await fetchTasks() // обновить список задач после создания новой
     handleCloseCreateModal()
@@ -191,11 +196,7 @@ const SprintBoard = () => {
           ))}
         </Box>
       </Box>
-      <CreateTaskModal
-        open={isCreateModalOpen}
-        onClose={handleCloseCreateModal}
-        onSubmit={handleCreateTaskSubmit}
-      />
+      <CreateTaskModal open={isCreateModalOpen} onClose={handleCloseCreateModal} onSubmit={handleCreateTaskSubmit} />
     </Box>
   )
 }

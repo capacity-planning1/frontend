@@ -6,7 +6,7 @@ import AppHeader from '../components/AppHeader'
 
 import '../components/AppHeader.scss'
 import './MyTasks.scss'
-import TasksList from './components/TasksList'
+import TasksList from '../TasksPage/components/TasksList'
 
 export interface Task {
   id: number
