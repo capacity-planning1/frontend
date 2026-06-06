@@ -162,6 +162,10 @@
     border-radius: 0 !important;
     background: var(--color-input) !important;
 
+    .MuiFilledInput-input {
+      color: var(--color-text-main) !important;
+    }
+
     &:hover,
     &.Mui-focused {
       background: var(--color-input) !important;

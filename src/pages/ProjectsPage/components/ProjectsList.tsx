@@ -1,8 +1,8 @@
 import { useState } from 'react'
 
 import { Box, Button } from '@mui/material'
-import { useNavigate } from 'react-router-dom'
 
+import { client } from '../../../api/client'
 import { Project } from '../Projects'
 
 import CreateProjectModal from './CreateProjectModal'
@@ -11,10 +11,10 @@ import '../Projects.scss'
 
 interface ProjectsListProps {
   projects: Project[]
+  onChanged: () => void
 }
 
-const ProjectsList = ({ projects }: ProjectsListProps) => {
-  const navigate = useNavigate()
+const ProjectsList = ({ projects, onChanged }: ProjectsListProps) => {
   const [isModalOpen, setIsModalOpen] = useState(false)
 
   const handleOpenModal = () => {
@@ -25,11 +25,21 @@ const ProjectsList = ({ projects }: ProjectsListProps) => {
     setIsModalOpen(false)
   }
 
-  const handleCreateProject = (projectData: { name: string; description: string; logo?: File }) => {
-    console.log('Создание проекта:', projectData)
-    const newProjectId = 1 // пока что
-    navigate(`/sprint-board?projectId=${newProjectId}`)
+  const handleCreateProject = async (projectData: { name: string; description: string; logo?: File }) => {
+    const ownerStudentId = localStorage.getItem('student_id')
+    // owner_student_id отсутствует в устаревшей schema.ts — обходим типы
+    const response = await (client.POST as any)('/projects/', {
+      body: {
+        name: projectData.name,
+        description: projectData.description || null,
+        owner_student_id: ownerStudentId,
+      },
+    })
+    if (response?.error) {
+      console.error('Ошибка создания проекта:', response.error)
+    }
     handleCloseModal()
+    onChanged()
   }
 
   return (
@@ -37,7 +47,7 @@ const ProjectsList = ({ projects }: ProjectsListProps) => {
       <Box className='projects-list'>
         <Box className='projects-grid'>
           {projects.map((project) => (
-            <ProjectCard key={project.id} project={project} />
+            <ProjectCard key={project.id} project={project} onDeleted={onChanged} />
           ))}
           <Box className='create-project-card' onClick={handleOpenModal}>
             <Button className='create-project-text'>Создать проект</Button>

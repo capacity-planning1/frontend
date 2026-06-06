@@ -32,6 +32,9 @@ const AppHeader = () => {
             <Button component={Link} to='/tasks' className='header-tab' disableRipple sx={{ textTransform: 'none' }}>
               Мои задачи
             </Button>
+            <Button component={Link} to='/workload' className='header-tab' disableRipple sx={{ textTransform: 'none' }}>
+              Загруженность
+            </Button>
           </Box>
         </Box>
         <Box className='header-right'>

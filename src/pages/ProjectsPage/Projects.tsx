@@ -1,120 +1,68 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 
 import { Box, CircularProgress, Typography, Button } from '@mui/material'
 
 import './Projects.scss'
 import { client } from '../../api/client'
-import type { components } from '../../api/schema'
 import AppHeader from '../components/AppHeader'
 
 import '../components/AppHeader.scss'
 import ProjectsList from './components/ProjectsList'
 
 export interface Project {
-  id: number
+  id: string
   name: string
   description: string
   peopleCount: number
   activeTasks: number
 }
 
-// Тип для ответа от API
-type ProjectResponse = components['schemas']['ProjectResponse']
-type ProjectListResponse = components['schemas']['ProjectListResponse']
+// Реальный ответ бэка (устаревшая schema.ts не совпадает — типизируем вручную)
+interface ApiProject {
+  id: string
+  name: string
+  description: string | null
+}
+interface ProjectListApiResponse {
+  items: ApiProject[]
+  info: { total: number; page: number; page_num: number }
+}
 
 const Projects = () => {
   const [projects, setProjects] = useState<Project[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
 
-  useEffect(() => {
-    const fetchProjects = async () => {
-      try {
-        setLoading(true)
-        setError(null)
-
-        const response = await client.GET('/projects', {
-          params: {
-            query: {
-              page: 1,
-              page_size: 100,
-            },
-          },
-        })
-
-        if (response.error) {
-          setError('Ошибка загрузки проектов')
-          console.error('API Error:', response.error)
-          return
-        }
-
-        if (!response.data) {
-          setError('Нет данных от сервера')
-          return
-        }
-
-        const data = response.data as ProjectListResponse
-
-        const formattedProjects: Project[] = await Promise.all(
-          data.items.map(async (item: ProjectResponse) => {
-            // Получаем количество участников проекта
-            let peopleCount = 0
-            try {
-              const membersResponse = await client.GET('/projects/{project_id}/members', {
-                params: {
-                  path: { project_id: item.id },
-                  query: { page: 1, page_size: 100 },
-                },
-              })
-              if (membersResponse.data) {
-                peopleCount = membersResponse.data.items.length
-              }
-            } catch (err) {
-              console.error(`Failed to fetch members for project ${item.id}:`, err)
-            }
-
-            // Получаем количество активных задач
-            let activeTasks = 0
-            try {
-              const tasksResponse = await client.GET('/projects/{project_id}/tasks', {
-                params: {
-                  path: { project_id: item.id },
-                  query: { page: 1, page_size: 100 },
-                },
-              })
-              if (tasksResponse.data) {
-                // Считаем только задачи со статусом не "done"
-                activeTasks = tasksResponse.data.items.filter((task) => task.status !== 'done').length
-              }
-            } catch (err) {
-              console.error(`Failed to fetch tasks for project ${item.id}:`, err)
-            }
-
-            return {
-              id: item.id,
-              name: item.name,
-              description: item.description || 'Описание отсутствует',
-              peopleCount,
-              activeTasks,
-            }
-          }),
-        )
-
-        setProjects(formattedProjects)
-      } catch (err) {
-        console.error('Fetch error:', err)
-        if (err instanceof Error) {
-          setError(err.message)
-        } else {
-          setError('Неизвестная ошибка')
-        }
-      } finally {
-        setLoading(false)
+  const fetchProjects = useCallback(async () => {
+    try {
+      // «Мои проекты» = проекты текущего пользователя (фильтр по владельцу)
+      const ownerId = localStorage.getItem('student_id')
+      const response = await (client.GET as any)('/projects/', {
+        params: { query: ownerId ? { owner_student_id: ownerId } : {} },
+      })
+      if (response?.error) {
+        setError('Ошибка загрузки проектов')
+      } else if (response?.data) {
+        const data = response.data as ProjectListApiResponse
+        const mapped: Project[] = data.items.map((p) => ({
+          id: String(p.id),
+          name: p.name,
+          description: p.description ?? 'Описание отсутствует',
+          peopleCount: 0,
+          activeTasks: 0,
+        }))
+        setProjects(mapped)
       }
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Неизвестная ошибка')
+    } finally {
+      setLoading(false)
     }
-
-    fetchProjects()
   }, [])
+
+  useEffect(() => {
+    fetchProjects()
+  }, [fetchProjects])
 
   if (loading) {
     return (
@@ -150,7 +98,7 @@ const Projects = () => {
     <Box className='my-projects-page'>
       <AppHeader />
       <Box className='projects-content'>
-        <ProjectsList projects={projects} />
+        <ProjectsList projects={projects} onChanged={fetchProjects} />
       </Box>
     </Box>
   )

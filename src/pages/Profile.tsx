@@ -1,6 +1,11 @@
 import React, { useEffect, useState } from 'react'
 
+import { Box, CircularProgress, Paper, Typography } from '@mui/material'
+
 import { client } from '../api/client'
+
+import AppHeader from './components/AppHeader'
+import './components/AppHeader.scss'
 
 interface ProfileData {
   id: number
@@ -42,19 +47,33 @@ const Profile: React.FC = () => {
     fetchProfile()
   }, [])
 
-  if (loading) return <h2>Загрузка...</h2>
-  if (error) return <h2>Ошибка: {error}</h2>
-  if (!profile) return <h2>Профиль не найден</h2>
-
   return (
-    <div>
-      <h2>Профиль студента</h2>
-      <p>
-        Имя: {profile.first_name} {profile.last_name}
-      </p>
-      <p>Email: {profile.email}</p>
-      <p>Навыки: {profile.skills || 'не указаны'}</p>
-    </div>
+    <Box sx={{ minHeight: '100vh', bgcolor: '#d9d9d9' }}>
+      <AppHeader />
+      <Box sx={{ p: 4, maxWidth: 720, mx: 'auto' }}>
+        <Typography variant='h4' sx={{ mb: 3, color: '#1a1a1a' }}>
+          Профиль студента
+        </Typography>
+
+        {loading ? (
+          <Box sx={{ display: 'flex', justifyContent: 'center', py: 6 }}>
+            <CircularProgress />
+          </Box>
+        ) : error ? (
+          <Typography sx={{ color: '#b00020' }}>{error}</Typography>
+        ) : !profile ? (
+          <Typography sx={{ color: '#1a1a1a' }}>Профиль не найден</Typography>
+        ) : (
+          <Paper elevation={0} sx={{ p: 3, bgcolor: '#fff' }}>
+            <Typography variant='h5' sx={{ mb: 2, color: '#1a1a1a' }}>
+              {profile.first_name} {profile.last_name}
+            </Typography>
+            <Typography sx={{ color: '#1a1a1a', mb: 1 }}>Email: {profile.email}</Typography>
+            <Typography sx={{ color: '#1a1a1a' }}>Навыки: {profile.skills || 'не указаны'}</Typography>
+          </Paper>
+        )}
+      </Box>
+    </Box>
   )
 }
 

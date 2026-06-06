@@ -1,3 +1,4 @@
+import { useDroppable } from '@dnd-kit/core'
 import { Box, Typography, Button } from '@mui/material'
 
 import TaskCard from './TaskCard'
@@ -5,13 +6,14 @@ import TaskCard from './TaskCard'
 import '../SprintBoard.scss'
 
 interface Task {
-  id: number
+  id: string
   number: string
   assignee: string
   status: string
 }
 
 interface TaskColumnProps {
+  id: string
   title: string
   tasks: Task[]
   hasButton: boolean
@@ -19,7 +21,9 @@ interface TaskColumnProps {
   onButtonClick?: () => void
 }
 
-const TaskColumn = ({ title, tasks, hasButton, buttonText, onButtonClick }: TaskColumnProps) => {
+const TaskColumn = ({ id, title, tasks, hasButton, buttonText, onButtonClick }: TaskColumnProps) => {
+  const { setNodeRef, isOver } = useDroppable({ id })
+
   return (
     <Box className='task-column'>
       <Box className='button-area'>
@@ -34,7 +38,7 @@ const TaskColumn = ({ title, tasks, hasButton, buttonText, onButtonClick }: Task
 
       <Typography className='column-title'>{title}</Typography>
 
-      <Box className='tasks-container'>
+      <Box ref={setNodeRef} className={`tasks-container${isOver ? ' is-over' : ''}`}>
         {tasks.map((task) => (
           <TaskCard key={task.id} task={task} />
         ))}

@@ -3,7 +3,6 @@ import { useState, useEffect } from 'react'
 import { Box, CircularProgress, Typography, Button } from '@mui/material'
 
 import { client } from '../../api/client'
-import type { components } from '../../api/schema'
 import AppHeader from '../components/AppHeader'
 
 import '../components/AppHeader.scss'
@@ -11,20 +10,29 @@ import './MyTasks.scss'
 import TasksList from './components/TasksList'
 
 export interface Task {
-  id: number
+  id: string
+  projectId: string
   title: string
   description: string
   remainingTime: string
   plannedTime: string
+  status: string
+  priority: string
+  sprintId: string | null
 }
 
-// Мок-данные для времени
-const mockTimeStats = [
-  { remainingTime: '2 ч 15 мин', plannedTime: '4 ч 00 мин' },
-  { remainingTime: '1 ч 30 мин', plannedTime: '3 ч 00 мин' },
-  { remainingTime: '0 ч 45 мин', plannedTime: '2 ч 00 мин' },
-  { remainingTime: '3 ч 00 мин', plannedTime: '5 ч 00 мин' },
-]
+// Реальные ответы бэка (устаревшая schema.ts не совпадает — типизируем вручную)
+interface ApiProject {
+  id: string
+}
+interface ApiTask {
+  id: string
+  title: string
+  description: string | null
+  status: string
+  priority?: string
+  sprint_id?: string | null
+}
 
 const Tasks = () => {
   const [tasks, setTasks] = useState<Task[]>([])
@@ -32,56 +40,46 @@ const Tasks = () => {
   const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
+    // Глобального «мои задачи» на бэке нет — агрегируем задачи по всем проектам
     const fetchTasks = async () => {
       try {
-        setLoading(true)
-        setError(null)
-
-        const response = await client.GET('/projects/{project_id}/tasks', {
-          params: {
-            path: {
-              project_id: 1, // временно
-            },
-            query: {
-              page: 1,
-              page_size: 100,
-            },
-          },
+        // только проекты текущего пользователя (фильтр по владельцу)
+        const ownerId = localStorage.getItem('student_id')
+        const projectsRes = await (client.GET as any)('/projects/', {
+          params: { query: ownerId ? { owner_student_id: ownerId } : {} },
         })
-
-        if (response.error) {
+        if (projectsRes?.error) {
           setError('Ошибка загрузки задач')
-          console.error('API Error:', response.error)
-        } else if (response.data) {
-          const data = response.data as {
-            items: components['schemas']['ProjectTaskResponse'][]
-            total: number
-            page: number
-            page_size: number
+          return
+        }
+        const projects: ApiProject[] = projectsRes?.data?.items ?? []
+        const all: Task[] = []
+        for (const project of projects) {
+          const tasksRes = await (client.GET as any)('/projects/{project_id}/sprints/tasks/', {
+            params: { path: { project_id: project.id } },
+          })
+          const items: ApiTask[] = tasksRes?.data?.items ?? []
+          for (const t of items) {
+            all.push({
+              id: String(t.id),
+              projectId: project.id,
+              title: t.title,
+              description: t.description ?? '',
+              remainingTime: '—',
+              plannedTime: '—',
+              status: t.status,
+              priority: t.priority ?? 'MEDIUM',
+              sprintId: t.sprint_id ?? null,
+            })
           }
-
-          const formattedTasks: Task[] = data.items.map((item, index) => ({
-            id: item.id,
-            title: item.title,
-            description: item.description || 'Описание отсутствует',
-            remainingTime: mockTimeStats[index].remainingTime,
-            plannedTime: mockTimeStats[index].plannedTime,
-          }))
-
-          setTasks(formattedTasks)
         }
+        setTasks(all)
       } catch (err) {
-        console.error('Fetch error:', err)
-        if (err instanceof Error) {
-          setError(err.message)
-        } else {
-          setError('Неизвестная ошибка')
-        }
+        setError(err instanceof Error ? err.message : 'Неизвестная ошибка')
       } finally {
         setLoading(false)
       }
     }
-
     fetchTasks()
   }, [])
 

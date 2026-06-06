@@ -4,11 +4,15 @@ import TaskCard from './TaskCard'
 import '../MyTasks.scss'
 
 interface Task {
-  id: number
+  id: string
+  projectId: string
   title: string
   description: string
   remainingTime: string
   plannedTime: string
+  status: string
+  priority: string
+  sprintId: string | null
 }
 
 interface TasksListProps {
