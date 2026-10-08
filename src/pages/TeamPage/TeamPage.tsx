@@ -8,20 +8,24 @@ import TeamBlock from './components/TeamBlock'
 
 const TeamPage: React.FC = () => {
   return (
-    <section className='TeamPage-Field_block'>
-      <Grid container spacing={4} className='TeamPage-Grid'>
-        <Grid size={{ xs: 12, md: 6 }}>
-          <TeamBlock>Команда 1</TeamBlock>
-        </Grid>
+    <section className='TeamPage-Section'>
+      <nav className='TeamPage-Nav'></nav>
 
-        <Grid size={{ xs: 12, md: 6 }}>
-          <TeamBlock>Команда 2</TeamBlock>
-        </Grid>
+      <section className='TeamPage-Field_block'>
+        <Grid container columnSpacing={4} rowSpacing={4} className='TeamPage-Grid'>
+          <Grid size={{ xs: 12, md: 6 }}>
+            <TeamBlock>Кол-во задач</TeamBlock>
+          </Grid>
 
-        <Grid size={{ xs: 12, md: 6 }}>
-          <TeamBlock>Команда 3</TeamBlock>
+          <Grid size={{ xs: 12, md: 6 }}>
+            <TeamBlock>Кол-во задач</TeamBlock>
+          </Grid>
+
+          <Grid size={{ xs: 12, md: 6 }}>
+            <TeamBlock>Кол-во задач</TeamBlock>
+          </Grid>
         </Grid>
-      </Grid>
+      </section>
     </section>
   )
 }

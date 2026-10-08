@@ -1,35 +1,117 @@
-.TeamPage-Field_block {
-    background-color: #403f3f;
-    width: 1746px;
-    margin: 0px auto;
-    padding: 40px 0;
+.TeamPage-Section {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    background: #d9d9d9;
+    box-sizing: border-box;
+    min-height: 100vh;
 }
 
-.TeamPage-TeamBlock {
-    background-color: black;
-    height: 285px;
-    width: 701px; 
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-     padding: 20px;
+.TeamPage-Nav {
+    width: 100%;
+    height: 80px;
+    background: #716868;
+    margin-bottom: 68px;
+}
+
+.TeamPage-Field_block {
+    width: calc(100% - 56px);
+    max-width: 1746px;
+    margin: 0 auto;
+    padding: 38px 46px;
+    background: #3f3f3f;
+    box-sizing: border-box; 
 }
 
 .TeamPage-Grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 40px; 
-    padding: 40px;
+    width: 100%;
+    margin: 0 !important;
     color: white;
+    box-sizing: border-box;
 }
 
-.TeamPage-Back_field {
-    margin: 0px;
+.TeamPage-TeamBlock {
+    width: 100%;
+    height: 285px;
+    padding: 18px 15px 18px 30px;
+    background: #000;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+}
+
+.TeamPage-TeamBlock .content {
+    color: #fff;
+    font-size: 12px;
+    line-height: 1.2;
+}
+
+.TeamPage-TeamBlock .content:first-child {
+    margin-bottom: 100px;
 }
 
 .TeamPage-avatar {
-  width: 172px;
-  height: 172px;
-  background: lightgray;
-  border-radius: 50%;
+    width: 172px;
+    height: 172px;
+    min-width: 172px;
+    background: lightgray;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    right: 58px;
+    transform: translateY(-50%);
+}
+
+.TeamPage-TeamBlock {
+    position: relative;
+}
+
+@media (max-width: 900px) {
+    .TeamPage-Field_block {
+        width: calc(100% - 30px);
+        padding: 30px 20px;
+    }
+
+    .TeamPage-TeamBlock {
+        height: 250px;
+    }
+
+    .TeamPage-avatar {
+        width: 140px;
+        height: 140px;
+        min-width: 140px;
+        right: 35px;
+    }
+
+    .TeamPage-TeamBlock .content:first-child {
+        margin-bottom: 80px;
+    }
+}
+
+@media (max-width: 600px) {
+    .TeamPage-Nav {
+        height: 60px;
+    }
+
+    .TeamPage-Field_block {
+        width: 100%;
+        min-height: calc(100vh - 60px);
+        padding: 20px 10px;
+    }
+
+    .TeamPage-TeamBlock {
+        height: 220px;
+        padding: 15px;
+    }
+
+    .TeamPage-avatar {
+        width: 100px;
+        height: 100px;
+        min-width: 100px;
+        right: 20px;
+    }
+
+    .TeamPage-TeamBlock .content:first-child {
+        margin-bottom: 65px;
+    }
 }
