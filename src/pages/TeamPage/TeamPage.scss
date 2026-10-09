@@ -1,117 +1,184 @@
 .TeamPage-Section {
-    width: 100%;
-    margin: 0;
-    padding: 0;
-    background: #d9d9d9;
-    box-sizing: border-box;
-    min-height: 100vh;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  background: #d9d9d9;
+  box-sizing: border-box;
+  min-height: 100vh;
 }
 
 .TeamPage-Nav {
-    width: 100%;
-    height: 80px;
-    background: #716868;
-    margin-bottom: 68px;
+  width: 100%;
+  height: 80px;
+  background: #716868;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 40px;
+  box-sizing: border-box;
+  margin-bottom: 40px;
+}
+
+.TeamPage-Nav-logo {
+  width: 50px;
+  height: 50px;
+  background: #cfcfcf;
+  border-radius: 50%;
+}
+
+.TeamPage-Nav-links {
+  display: flex;
+  gap: 40px;
+}
+
+.TeamPage-Nav-links a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 18px;
+}
+
+.TeamPage-Nav-exit {
+  color: #fff;
+  text-decoration: none;
+  font-size: 18px;
+}
+
+.TeamPage-Title {
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 28px;
+}
+
+.TeamPage-Form {
+  position: relative;
+  width: 400px;
+  margin: 30px auto;
+  padding: 20px;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.TeamPage-Form::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 10px;
+  background: #d9d9d9;
+}
+
+.TeamPage-Form h3 {
+  margin: 0;
+}
+
+.TeamPage-Form input {
+  padding: 8px;
+  border: 1px solid #ccc;
+}
+
+.TeamPage-Form button {
+  padding: 10px;
+  border: none;
+  background: #716868;
+  color: #fff;
+  cursor: pointer;
 }
 
 .TeamPage-Field_block {
-    width: calc(100% - 56px);
-    max-width: 1746px;
-    margin: 0 auto;
-    padding: 38px 46px;
-    background: #3f3f3f;
-    box-sizing: border-box; 
+  width: calc(100% - 56px);
+  max-width: 1746px;
+  margin: 0 auto;
+  padding: 38px 46px;
+  background: #3f3f3f;
+  box-sizing: border-box;
 }
 
 .TeamPage-Grid {
-    width: 100%;
-    margin: 0 !important;
-    color: white;
-    box-sizing: border-box;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 32px;
 }
 
 .TeamPage-TeamBlock {
-    width: 100%;
-    height: 285px;
-    padding: 18px 15px 18px 30px;
-    background: #000;
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
+  position: relative;
+  width: calc(50% - 16px);
+  height: 285px;
+  padding: 18px 15px 18px 30px;
+  background: #000;
+  box-sizing: border-box;
 }
 
 .TeamPage-TeamBlock .content {
-    color: #fff;
-    font-size: 12px;
-    line-height: 1.2;
+  color: #fff;
+  font-size: 16px;
 }
 
 .TeamPage-TeamBlock .content:first-child {
-    margin-bottom: 100px;
+  margin-bottom: 20px;
+  font-size: 20px;
 }
 
 .TeamPage-avatar {
-    width: 172px;
-    height: 172px;
-    min-width: 172px;
-    background: lightgray;
-    border-radius: 50%;
-    position: absolute;
-    top: 50%;
-    right: 58px;
-    transform: translateY(-50%);
-}
-
-.TeamPage-TeamBlock {
-    position: relative;
+  width: 172px;
+  height: 172px;
+  background: lightgray;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  right: 58px;
+  transform: translateY(-50%);
+  object-fit: cover;
 }
 
 @media (max-width: 900px) {
-    .TeamPage-Field_block {
-        width: calc(100% - 30px);
-        padding: 30px 20px;
-    }
+  .TeamPage-Field_block {
+    width: calc(100% - 30px);
+    padding: 30px 20px;
+  }
 
-    .TeamPage-TeamBlock {
-        height: 250px;
-    }
+  .TeamPage-TeamBlock {
+    width: 100%;
+    height: 250px;
+  }
 
-    .TeamPage-avatar {
-        width: 140px;
-        height: 140px;
-        min-width: 140px;
-        right: 35px;
-    }
-
-    .TeamPage-TeamBlock .content:first-child {
-        margin-bottom: 80px;
-    }
+  .TeamPage-avatar {
+    width: 140px;
+    height: 140px;
+    right: 35px;
+  }
 }
 
 @media (max-width: 600px) {
-    .TeamPage-Nav {
-        height: 60px;
-    }
+  .TeamPage-Nav {
+    height: 60px;
+    padding: 0 15px;
+  }
 
-    .TeamPage-Field_block {
-        width: 100%;
-        min-height: calc(100vh - 60px);
-        padding: 20px 10px;
-    }
+  .TeamPage-Nav-links a,
+  .TeamPage-Nav-exit {
+    font-size: 14px;
+  }
 
-    .TeamPage-TeamBlock {
-        height: 220px;
-        padding: 15px;
-    }
+  .TeamPage-Form {
+    width: 90%;
+  }
 
-    .TeamPage-avatar {
-        width: 100px;
-        height: 100px;
-        min-width: 100px;
-        right: 20px;
-    }
+  .TeamPage-Field_block {
+    width: 100%;
+    padding: 20px 10px;
+  }
 
-    .TeamPage-TeamBlock .content:first-child {
-        margin-bottom: 65px;
-    }
+  .TeamPage-TeamBlock {
+    height: 220px;
+    padding: 15px;
+  }
+
+  .TeamPage-avatar {
+    width: 100px;
+    height: 100px;
+    right: 20px;
+  }
 }

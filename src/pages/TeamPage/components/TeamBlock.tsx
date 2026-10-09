@@ -1,17 +1,20 @@
 type Props = {
-  children: React.ReactNode
+  name: string
+  tasks: number
+  img: string
 }
 
-const TeamBlock: React.FC<Props> = ({ children }) => {
+const TeamBlock: React.FC<Props> = ({ name, tasks, img }) => {
   return (
     <div className='TeamPage-TeamBlock'>
       <div className='TeamPage-info'>
-        <div className='content'>Имя</div>
-        <div className='content'>{children}</div>
+        <div className='content'>{name}</div>
+        <div className='content'>Кол-во задач: {tasks}</div>
       </div>
 
-      <div className='TeamPage-avatar' />
+      <img className='TeamPage-avatar' src={img} alt='картинка' />
     </div>
   )
 }
+
 export default TeamBlock

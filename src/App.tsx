@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom'
 
 import Navigation from './components/Navigation'
 import PrivateRoute from './components/PrivateRoute'
@@ -16,11 +16,14 @@ import Tasks from './pages/Tasks'
 import TeamPage from './pages/TeamPage/TeamPage'
 import Teams from './pages/Teams'
 
-function App() {
+function AppContent() {
+  const location = useLocation()
+  const isTeamPage = location.pathname === '/teampage'
+
   return (
-    <BrowserRouter>
-      <Navigation />
-      <div style={{ padding: '20px' }}>
+    <>
+      {!isTeamPage && <Navigation />}
+      <div style={{ padding: isTeamPage ? 0 : '20px' }}>
         <Routes>
           <Route path='/login' element={<Login />} />
           <Route
@@ -123,6 +126,14 @@ function App() {
           />
         </Routes>
       </div>
+    </>
+  )
+}
+
+function App() {
+  return (
+    <BrowserRouter>
+      <AppContent />
     </BrowserRouter>
   )
 }
