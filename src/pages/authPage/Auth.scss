@@ -1,0 +1,253 @@
+.auth-page {
+  &__title {
+    margin-bottom: 24px !important;
+    color: var(--color-text-light);
+    font-weight: 400 !important;
+  }
+
+  &__stage {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    min-height: calc(100vh - 120px);
+    padding: 56px 24px;
+    background: var(--color-bg-light);
+  }
+}
+
+.auth-card {
+  display: flex;
+  overflow: hidden;
+  width: 100%;
+  max-width: 760px;
+  min-height: 430px;
+  border-radius: 22px !important;
+  background: transparent !important;
+
+  &__panel {
+    position: relative;
+    flex: 1 1 50%;
+    overflow: hidden;
+    transition:
+      background-color 0.35s ease,
+      transform 0.35s ease;
+
+    &--left {
+      border-top-left-radius: 22px;
+      border-bottom-left-radius: 22px;
+    }
+
+    &--right {
+      border-top-right-radius: 22px;
+      border-bottom-right-radius: 22px;
+    }
+  }
+
+  &__content {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 28px 32px;
+    transition:
+      opacity 0.28s ease,
+      transform 0.35s ease,
+      visibility 0.28s ease;
+  }
+
+  .is-active {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateX(0);
+    z-index: 2;
+  }
+
+  .is-hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  &--login {
+    .auth-card__panel--left {
+      background: var(--color-surface);
+    }
+
+    .auth-card__panel--right {
+      background: var(--color-accent);
+    }
+
+    .auth-card__panel--left .is-hidden {
+      transform: translateX(-24px);
+    }
+
+    .auth-card__panel--right .is-hidden {
+      transform: translateX(24px);
+    }
+  }
+
+  &--register {
+    .auth-card__panel--left {
+      background: var(--color-accent);
+    }
+
+    .auth-card__panel--right {
+      background: var(--color-surface);
+    }
+
+    .auth-card__panel--left .is-hidden {
+      transform: translateX(-24px);
+    }
+
+    .auth-card__panel--right .is-hidden {
+      transform: translateX(24px);
+    }
+  }
+}
+
+.form-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 250px;
+
+  &__tab {
+    margin-bottom: 56px !important;
+    color: var(--color-text-main);
+    font-size: 18px !important;
+    font-weight: 400 !important;
+    text-transform: lowercase;
+  }
+
+  &__fields {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    width: 100%;
+    margin-bottom: 20px;
+  }
+
+  &__checkbox {
+    width: 100%;
+    margin: 0 0 48px 0 !important;
+
+    .MuiFormControlLabel-label {
+      color: var(--color-text-main);
+      font-size: 16px;
+    }
+
+    .MuiCheckbox-root {
+      padding-left: 0;
+    }
+  }
+
+  &__submit {
+    color: var(--color-text-main) !important;
+    font-size: 22px !important;
+    text-transform: none !important;
+  }
+
+  &__switch-mobile {
+    display: none !important;
+    margin-top: 16px !important;
+    color: var(--color-text-main) !important;
+    text-transform: none !important;
+  }
+
+  .MuiFilledInput-root {
+    border-radius: 0 !important;
+    background: var(--color-input) !important;
+
+    &:hover,
+    &.Mui-focused {
+      background: var(--color-input) !important;
+    }
+
+    &::before,
+    &::after {
+      display: none !important;
+    }
+  }
+
+  .MuiInputLabel-root {
+    color: #666 !important;
+  }
+}
+
+.switch-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  max-width: 250px;
+  min-height: 280px;
+
+  &__tab {
+    margin-bottom: 120px !important;
+    color: var(--color-text-main);
+    font-size: 18px !important;
+    text-transform: lowercase;
+  }
+
+  &__message {
+    margin-bottom: 28px !important;
+    color: var(--color-text-accent);
+    font-size: 24px !important;
+    text-align: center;
+  }
+
+  &__action {
+    color: var(--color-text-accent) !important;
+    text-transform: none !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .auth-page {
+    padding: 20px 16px 32px;
+
+    &__title {
+      font-size: 32px !important;
+    }
+
+    &__stage {
+      padding: 24px 12px;
+    }
+  }
+
+  .auth-card {
+    flex-direction: column;
+    max-width: 460px;
+    min-height: 640px;
+
+    &__panel {
+      min-height: 320px;
+
+      &--left {
+        border-top-right-radius: 22px;
+        border-bottom-left-radius: 0;
+      }
+
+      &--right {
+        border-top-right-radius: 0;
+        border-bottom-left-radius: 22px;
+      }
+    }
+  }
+
+  .switch-block {
+    &__tab {
+      margin-bottom: 48px !important;
+    }
+
+    &__message {
+      margin-bottom: 16px !important;
+      font-size: 20px !important;
+    }
+  }
+}
